@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class PlayerController : MonoBehaviour
     bool _isStepMoving = false;
     float _h, _v;
     Vector2 _dir;
+
     Rigidbody2D _rb;
+    GameManager _gm;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -44,6 +48,13 @@ public class PlayerController : MonoBehaviour
         {
             float speed = _dir == Vector2.zero ? 0 : _speed;
             _rb.velocity = new Vector2(speed * _h, speed * _v);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Exp")
+        {
+
         }
     }
     private IEnumerator DelayMethod(float seconds, Action action)

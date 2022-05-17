@@ -30,7 +30,10 @@ public class HPController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Damege();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Damege();
+        }
     }
     void Damege()
     {
