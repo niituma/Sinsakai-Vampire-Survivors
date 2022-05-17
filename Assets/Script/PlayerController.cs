@@ -34,9 +34,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _isMoving && !_isStepMoving)
         {
+            var _scale = transform.localScale;
+
             _isStepMoving = true;
             _isMoving = false;
-            _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed, _rb.velocity.y) :
+            _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed * _scale.x, _rb.velocity.y) :
                 _rb.velocity = new Vector2(_stepSpeed * _h, _stepSpeed * _v);
             StartCoroutine(DelayMethod(_stepMoveCooltime, () => _isStepMoving = false));
             StartCoroutine(DelayMethod(_moveCooltime, () => _isMoving = true));
@@ -48,13 +50,26 @@ public class PlayerController : MonoBehaviour
         {
             float speed = _dir == Vector2.zero ? 0 : _speed;
             _rb.velocity = new Vector2(speed * _h, speed * _v);
+
+            if (_h > 0)
+            {
+                var scale = transform.localScale;
+                scale.x = 1;
+                transform.localScale = scale;
+            }
+            else if(_h < 0)
+            {
+                var scale = transform.localScale;
+                scale.x = -1;
+                transform.localScale = scale;
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Exp")
+        if (collision.gameObject.tag == "Enemy" && !_isMoving)
         {
-
+            collision.gameObject.SetActive(false);
         }
     }
     private IEnumerator DelayMethod(float seconds, Action action)

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Slider _expSlider;
-    int _expValue;
+    [SerializeField] int _expValue = 5;
 
     public Slider ExpSlider { get; set; }
     GameObject _player;
@@ -21,15 +21,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_expSlider.maxValue == _expValue)
+        
+    }
+    /// <summary>
+    /// 経験値取得
+    /// </summary>
+    public void AddExp(int addexp)
+    {
+        _expSlider.value += addexp;
+
+        //レベルアップ
+        if (_expSlider.value == _expValue)
         {
             _expSlider.value = 0;
-            _expValue = +_expValue;
+            _expValue += _expValue;
             _expSlider.maxValue = _expValue;
         }
-    }
-    public void AddExp()
-    {
-        _expSlider.value++;
     }
 }
