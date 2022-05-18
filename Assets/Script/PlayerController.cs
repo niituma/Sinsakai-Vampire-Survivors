@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" && !_isMoving)
         {
-            collision.gameObject.SetActive(false);
+            collision.gameObject.GetComponent<Enemybase>().Destroy();
         }
     }
     private IEnumerator DelayMethod(float seconds, Action action)
