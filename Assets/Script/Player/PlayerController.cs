@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour
     Vector2 _dir;
 
     Rigidbody2D _rb;
+    PlayerHPController _hp;
     GameManager _gm;
 
     // Start is called before the first frame update
     void Start()
     {
+        _hp = GetComponent<PlayerHPController>();
         _rb = GetComponent<Rigidbody2D>();
         _gm = FindObjectOfType<GameManager>();
     }
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
         _dir = new Vector2(_h, _v);
+
 
         if (Input.GetButtonDown("Jump") && _isMoving && !_isStepMoving)
         {
@@ -67,9 +70,16 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" && !_isMoving)
+        if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemybase>().Destroy();
+            if (_isMoving)
+            {
+                _hp.Damege();
+            }
+            else
+            {
+                collision.gameObject.GetComponent<Enemybase>().Destroy();
+            }
         }
     }
     private IEnumerator DelayMethod(float seconds, Action action)

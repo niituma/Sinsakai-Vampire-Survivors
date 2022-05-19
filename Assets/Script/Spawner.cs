@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("最初に一気にスポーンする割合"), Range(0, 100)] int _startInstantiateRatio = 10;
 
     float _timer = 0.0f;
-    Vector3 _popPos = new Vector3(0, 0, 0);
+    Vector3 _position = new Vector3(0, 0, 0);
     GameObject _player;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
 
@@ -59,8 +59,30 @@ public class Spawner : MonoBehaviour
         var go = GameObject.Instantiate(_prefab);
         var script = go.GetComponent<Enemy>();
         */
-        _popPos.x = _player.transform.position.x + UnityEngine.Random.Range(-_spawnArea.x, _spawnArea.x);
-        _popPos.y = _player.transform.position.y + UnityEngine.Random.Range(-_spawnArea.y, _spawnArea.y);
-        script.transform.position = _popPos;
+        _position = SpawnRandomPos() + _player.transform.position;
+
+        script.transform.position = _position;
+    }
+
+    Vector3 SpawnRandomPos()
+    {
+        Vector3 pos = new Vector3();
+
+        float f = UnityEngine.Random.value > 0.5f ? -1f : 1f;
+
+        if (UnityEngine.Random.value > 0.5f)
+        {
+            pos.x = UnityEngine.Random.Range(-_spawnArea.x, _spawnArea.x);
+            pos.y = _spawnArea.y * f;
+        }
+        else
+        {
+            pos.x = _spawnArea.x * f;
+            pos.y = UnityEngine.Random.Range(-_spawnArea.y, _spawnArea.y);
+        }
+
+        pos.z = 0;
+
+        return pos;
     }
 }

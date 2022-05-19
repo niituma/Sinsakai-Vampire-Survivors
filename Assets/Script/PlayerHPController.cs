@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class HPController : MonoBehaviour
+public class PlayerHPController : MonoBehaviour
 {
     [SerializeField, Tooltip("–³“Gƒ‚[ƒh")] bool _godMode;
     [SerializeField, Tooltip("Å‘åHP")] float _maxhp = 200;
@@ -28,14 +28,7 @@ public class HPController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Damege();
-        }
-    }
-    void Damege()
+    public void Damege()
     {
         if (!_godMode)
         {
@@ -44,5 +37,11 @@ public class HPController : MonoBehaviour
             float value = _currenthp / _maxhp;
             DOTween.To(() => _slider.value, x => _slider.value = x, value, 0.5f);
         }
+    }
+    public void Heel(float value)
+    {
+        var heel = value;
+        _currenthp = Mathf.Min(_currenthp + heel,_maxhp);
+        _slider.value = _currenthp / _maxhp;
     }
 }

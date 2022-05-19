@@ -6,9 +6,15 @@ public class Enemybase : MonoBehaviour, IObjectPool
 {
     [SerializeField] float _speed = 4f;
     GameObject _player;
+    GameManager _gameManager;
+    ItemSpawner _itemSpawner;
+    Rigidbody2D _rb;
     // Start is called before the first frame update
     void Start()
     {
+        _gameManager = FindObjectOfType<GameManager>();
+        _itemSpawner = _gameManager.GetComponent<ItemSpawner>();
+        _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -17,7 +23,8 @@ public class Enemybase : MonoBehaviour, IObjectPool
     {
         if (_player)
         {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(_player.transform.position.x, _player.transform.position.y), _speed * Time.deltaTime);
+            Vector2 Dir = (_player.transform.position - transform.position).normalized;
+            _rb.velocity = Dir * _speed;
         }
     }
 
@@ -38,5 +45,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
     {
         gameObject.SetActive(false);
         _isActrive = false;
+        var item = _itemSpawner.Spawn();
+        item.transform.position = transform.position;
     }
 }
