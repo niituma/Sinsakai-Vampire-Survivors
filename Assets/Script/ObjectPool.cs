@@ -28,7 +28,9 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
         //既にオブジェクトサイズが大きいときは更新しない
         if (size < Pool.Count) return;
 
-        for (int i = Pool.Count - 1; i < size; ++i)
+
+
+        for (int i = 0; i < size; ++i)
         {
             T Obj = default(T);
             if (Parent)
@@ -48,7 +50,8 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
         T ret = null;
         for (int i = 0; i < Pool.Count; ++i)
         {
-            int index = (Index + i) % Pool.Count;
+            int index = i;
+
             if (Pool[index].IsActive) continue;
 
             Pool[index].Create();

@@ -265,11 +265,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aeb7aecb30c6374f84b1831f368a230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnArea: {x: 10, y: 8}
+  _spawnArea: {x: 20, y: 16}
   _time: 2
   _prefab: {fileID: -2620388822643326051, guid: 8bfbfa1d211a05b489c6b03c52d9ac3f, type: 3}
   _root: {fileID: 935972827}
   _prefabCapacity: 30
+  _startInstantiateRatio: 20
 --- !u!4 &509540009
 Transform:
   m_ObjectHideFlags: 0
@@ -1098,7 +1099,7 @@ MonoBehaviour:
   _speed: 7
   _stepSpeed: 20
   _moveCooltime: 0.2
-  _stepMoveCooltime: 2
+  _stepMoveCooltime: 1
 --- !u!114 &1232288557
 MonoBehaviour:
   m_ObjectHideFlags: 0
