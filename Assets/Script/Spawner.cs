@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("最初に一気にスポーンする割合"), Range(0, 100)] int _startInstantiateRatio = 10;
 
     float _timer = 0.0f;
+    float _fadetimer = 0.0f;
     Vector3 _position = new Vector3(0, 0, 0);
     GameObject _player;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
@@ -27,24 +28,18 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        bool IsmaxprefabPool = true;
-
-        foreach (var a in _enemyPool.GetPool)
+        _timer += Time.deltaTime;
+        _fadetimer += Time.deltaTime;
+        if (_fadetimer > 20f)
         {
-            if (!a.gameObject.activeSelf)
-            {
-                IsmaxprefabPool = false;
-            }
+            FadeSpawn();
+            _fadetimer = 0.0f;
         }
 
-        if (!IsmaxprefabPool)
+        if (_timer > _time)
         {
-            _timer += Time.deltaTime;
-            if (_timer > _time)
-            {
-                Spawn();
-                _timer -= _time;
-            }
+            Spawn();
+            _timer -= _time;
         }
     }
 
@@ -55,13 +50,27 @@ public class Spawner : MonoBehaviour
             return;
         }
         var script = _enemyPool.Instantiate();
-        /*
-        var go = GameObject.Instantiate(_prefab);
-        var script = go.GetComponent<Enemy>();
-        */
+
+        if (!script)
+        {
+            return;
+        }
+
+        EnemyDate _date = Resources.Load<EnemyDate>("EnemyDates/Test Enemy");
+        script.GetComponent<SpriteRenderer>().sprite = _date._model;
+
         _position = SpawnRandomPos() + _player.transform.position;
 
         script.transform.position = _position;
+    }
+
+    void FadeSpawn()
+    {
+        for (int i = 0; i < 20; ++i)
+        {
+            Spawn();
+        }
+        return;
     }
 
     Vector3 SpawnRandomPos()

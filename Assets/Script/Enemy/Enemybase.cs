@@ -13,8 +13,6 @@ public class Enemybase : MonoBehaviour, IObjectPool
     // Start is called before the first frame update
     void Start()
     {
-        //EnemyDate _date = Resources.Load<EnemyDate>("EnemyDates/Test Enemy");
-        //GetComponent<SpriteRenderer>().sprite = _date._model;
         _gameManager = FindObjectOfType<GameManager>();
         _itemSpawner = _gameManager.GetComponent<ItemSpawner>();
         _rb = GetComponent<Rigidbody2D>();
@@ -27,7 +25,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
         if (_player)
         {
             Vector2 Dir = (_player.transform.position - transform.position).normalized;
-            _rb.velocity = Dir * _speed;
+            _rb.velocity = Dir.normalized * _speed;
         }
     }
 
