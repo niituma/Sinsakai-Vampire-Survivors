@@ -56,8 +56,9 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        EnemyDate _date = Resources.Load<EnemyDate>("EnemyDates/Test Enemy");
+        EnemyDate _date = Resources.Load<EnemyDate>("EnemyDates/Enemy Bat");
         script.GetComponent<SpriteRenderer>().sprite = _date._model;
+        script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
 
         _position = SpawnRandomPos() + _player.transform.position;
 

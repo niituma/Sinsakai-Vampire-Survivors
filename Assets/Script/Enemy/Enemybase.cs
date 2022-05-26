@@ -26,6 +26,18 @@ public class Enemybase : MonoBehaviour, IObjectPool
         {
             Vector2 Dir = (_player.transform.position - transform.position).normalized;
             _rb.velocity = Dir.normalized * _speed;
+
+            var scale = transform.localScale;
+            if (transform.position.x > _player.transform.position.x && scale.x != -1)
+            {
+                scale.x = -1;
+                transform.localScale = scale;
+            }
+            else if(transform.position.x < _player.transform.position.x && scale.x != 1)
+            {
+                scale.x = 1;
+                transform.localScale = scale;
+            }
         }
     }
 
