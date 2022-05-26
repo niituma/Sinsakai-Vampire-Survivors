@@ -14,14 +14,17 @@ public class PlayerController : MonoBehaviour
     bool _isStepMoving = false;
     float _h, _v;
     Vector2 _dir;
+    Vector2 _lastdir = new Vector2(0, -1);
 
     Rigidbody2D _rb;
     PlayerHPController _hp;
     GameManager _gm;
+    Animator _anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponent<Animator>();
         _hp = GetComponent<PlayerHPController>();
         _rb = GetComponent<Rigidbody2D>();
         _gm = FindObjectOfType<GameManager>();
@@ -41,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
             _isStepMoving = true;
             _isMoving = false;
-            _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed * _scale.x, _rb.velocity.y) :
+            _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed * _lastdir.x, _stepSpeed * _lastdir.y) :
                 _rb.velocity = new Vector2(_stepSpeed * _h, _stepSpeed * _v);
             StartCoroutine(DelayMethod(_stepMoveCooltime, () => _isStepMoving = false));
             StartCoroutine(DelayMethod(_moveCooltime, () => _isMoving = true));
@@ -53,20 +56,11 @@ public class PlayerController : MonoBehaviour
         {
             float speed = _dir == Vector2.zero ? 0 : _speed;
             _rb.velocity = new Vector2(speed * _h, speed * _v);
-
-            if (_h > 0)
-            {
-                var scale = transform.localScale;
-                scale.x = 1;
-                transform.localScale = scale;
-            }
-            else if(_h < 0)
-            {
-                var scale = transform.localScale;
-                scale.x = -1;
-                transform.localScale = scale;
-            }
         }
+    }
+    private void LateUpdate()
+    {
+        AnimateDir();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -82,6 +76,28 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    void AnimateDir()
+    {
+        if (Mathf.Abs(_dir.x) > 0.5f)
+        {
+            _lastdir.x = _dir.x;
+            _lastdir.y = 0;
+        }
+
+        if (Mathf.Abs(_dir.y) > 0.5f)
+        {
+            _lastdir.y = _dir.y;
+            _lastdir.x = 0;
+        }
+
+        _anim.SetFloat("DirX", _dir.x);
+        _anim.SetFloat("DirY", _dir.y);
+        _anim.SetFloat("LastMoveX", _lastdir.x);
+        _anim.SetFloat("LastMoveY", _lastdir.y);
+        _anim.SetFloat("Input", _dir.magnitude);
+    }
+
     private IEnumerator DelayMethod(float seconds, Action action)
     {
         yield return new WaitForSeconds(seconds);
