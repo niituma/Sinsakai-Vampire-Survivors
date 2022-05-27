@@ -14,7 +14,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
     void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        _itemSpawner = _gameManager.GetComponent<ItemSpawner>();
+        _itemSpawner = FindObjectOfType<ItemSpawner>();
         _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("Player");
     }

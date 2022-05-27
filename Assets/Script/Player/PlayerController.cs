@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     GameManager _gm;
     Animator _anim;
 
+    public Vector2 Lastdir { get => _lastdir; set => _lastdir = value; }
+
     // Start is called before the first frame update
     void Start()
     {
