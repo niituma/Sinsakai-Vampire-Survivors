@@ -14,6 +14,13 @@ public class Spawner : MonoBehaviour
     Vector3 _position = new Vector3(0, 0, 0);
     GameObject _player;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
+    enum Enemy
+    {
+        Bat,
+        Skull
+    }
+
+    Enemy _enemy = Enemy.Bat;
 
     private void Start()
     {
@@ -56,7 +63,7 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        EnemyDate _date = Resources.Load<EnemyDate>("EnemyDates/Enemy Bat");
+        EnemyDate _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
         script.GetComponent<SpriteRenderer>().sprite = _date._model;
         script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
 

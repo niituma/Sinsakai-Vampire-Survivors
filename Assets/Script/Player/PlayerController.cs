@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         if (_isMoving)
         {
             float speed = _dir == Vector2.zero ? 0 : _speed;
-            _rb.velocity = new Vector2(speed * _h, speed * _v);
+            _rb.velocity = _dir.normalized * speed;
         }
     }
     private void LateUpdate()
