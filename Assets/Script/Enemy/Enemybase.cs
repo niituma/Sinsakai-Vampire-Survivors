@@ -5,14 +5,15 @@ using UnityEngine;
 public class Enemybase : MonoBehaviour, IObjectPool
 {
     [SerializeField] float _speed = 4f;
-    EnemyDate _date;
     GameObject _player;
     GameManager _gameManager;
     ItemSpawner _itemSpawner;
+    EnemyHPController _HP;
     Rigidbody2D _rb;
     // Start is called before the first frame update
     void Start()
     {
+        _HP = GetComponent<EnemyHPController>();
         _gameManager = FindObjectOfType<GameManager>();
         _itemSpawner = FindObjectOfType<ItemSpawner>();
         _rb = GetComponent<Rigidbody2D>();
@@ -39,11 +40,6 @@ public class Enemybase : MonoBehaviour, IObjectPool
                 transform.localScale = scale;
             }
         }
-    }
-
-    void DateLoad()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = _date._model;
     }
 
     //ObjectPool

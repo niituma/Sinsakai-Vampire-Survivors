@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                collision.gameObject.GetComponent<Enemybase>().Destroy();
+                collision.gameObject.GetComponent<EnemyHPController>().Damege(1);
             }
         }
     }
