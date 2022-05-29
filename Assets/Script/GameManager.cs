@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider _expSlider;
     [SerializeField] int _expValue = 5;
     [SerializeField] TextMeshProUGUI _levelText;
+    [SerializeField] GameObject _FinishPanel;
     int _level = 0;
 
     public Slider ExpSlider { get; set; }
@@ -26,6 +27,21 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void FinishGame()
+    {
+        var timer = FindObjectOfType<Timer>();
+        _FinishPanel.SetActive(true);
+        if (timer._minute >= 2)
+        {
+            _FinishPanel.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            _FinishPanel.transform.GetChild(2).gameObject.SetActive(true);
+        }
+    }
+
     /// <summary>
     /// ŒoŒ±’lŽæ“¾
     /// </summary>

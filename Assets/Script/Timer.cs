@@ -6,7 +6,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     float _second = 0;
-    int _minute = 0;
+    public int _minute { get; private set; }
     float _resetTime = 0;
     TextMeshProUGUI _text;
 

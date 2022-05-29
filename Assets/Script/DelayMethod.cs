@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AddOrignalMethod : MonoBehaviour
+public class AddOrignalMethod
 {
     public IEnumerator DelayMethod(float seconds, Action action)
     {
