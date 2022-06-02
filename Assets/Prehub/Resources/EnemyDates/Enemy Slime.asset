@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Enemy Slime
   m_EditorClassIdentifier: 
   _enemyName: Slime
-  _model: {fileID: -9010615838638220262, guid: 26f2fab31eacb6948aaee40453cfc60b, type: 3}
-  _animator: {fileID: 9100000, guid: a0fda547afbb49544bb6c05bdbc18b71, type: 2}
+  _model: {fileID: -6897147555146677718, guid: bbbae09279b66cb48b7d05525773c545, type: 3}
+  _animator: {fileID: 9100000, guid: 7e1e557da962fd34ea54b4692aa2007f, type: 2}
   _maxHP: 2
-  _gold: 0

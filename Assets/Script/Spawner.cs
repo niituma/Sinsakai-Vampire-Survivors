@@ -43,10 +43,10 @@ public class Spawner : MonoBehaviour
         _countTimer += Time.deltaTime;
         
 
-        if (_fadeTiming > _gameTimer._minute)
+        if (_fadeTiming == _gameTimer._minute)
         {
+            _fadeTiming += _fadeTiming;
             FadeSpawn();
-            _fadeTiming = 0.0f;
         }
 
         if (_countTimer > _time)

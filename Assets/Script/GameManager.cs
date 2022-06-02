@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _levelText;
     [SerializeField] GameObject _finishPanel;
     [SerializeField] GameObject _pausePanal;
+    [SerializeField] GameObject _skillSelectPanal;
     int _level = 0;
     public bool _isPause { get; private set; } = false;
 
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _player)
+        if (Input.GetKeyDown(KeyCode.Escape) && _player && !_skillSelectPanal)
         {
             IsPause();
         }
@@ -69,6 +70,9 @@ public class GameManager : MonoBehaviour
             _expSlider.value = 0;
             _expValue += _expValue;
             _expSlider.maxValue = _expValue;
+
+            _skillSelectPanal.SetActive(true);
+            _isPause = true;
         }
     }
 }

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Enemy Golem
   m_EditorClassIdentifier: 
   _enemyName: Golem
-  _model: {fileID: -9010615838638220262, guid: 26f2fab31eacb6948aaee40453cfc60b, type: 3}
-  _animator: {fileID: 9100000, guid: a0fda547afbb49544bb6c05bdbc18b71, type: 2}
+  _model: {fileID: -4841409092833791354, guid: 59a77fadbba25d14b813a011915c102b, type: 3}
+  _animator: {fileID: 9100000, guid: e8c83a4678a1ac14c947cffe78d2f526, type: 2}
   _maxHP: 5
-  _gold: 0

@@ -9,5 +9,4 @@ public class EnemyDate : ScriptableObject
 	public Sprite _model;
 	public UnityEditor.Animations.AnimatorController _animator;
 	public int _maxHP;
-	public int _gold;
 }
