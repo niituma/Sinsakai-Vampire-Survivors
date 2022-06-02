@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
 
     float _countTimer = 0.0f;
     [SerializeField]float _fadeTiming = 0.0f;
+    [SerializeField] float _changeEnemyTiming = 5.0f;
     Vector3 _position = new Vector3(0, 0, 0);
     GameObject _player;
     Timer _gameTimer;
@@ -40,6 +41,8 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         _countTimer += Time.deltaTime;
+        
+
         if (_fadeTiming > _gameTimer._minute)
         {
             FadeSpawn();
@@ -64,6 +67,15 @@ public class Spawner : MonoBehaviour
         if (!script)
         {
             return;
+        }
+
+        if (_changeEnemyTiming <= _gameTimer._minute)
+        {
+            if((int)_enemy != System.Enum.GetValues(typeof(Enemy)).Length - 1)
+            {
+                _enemy++;
+                _changeEnemyTiming += _changeEnemyTiming;
+            }
         }
 
         EnemyDate _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");

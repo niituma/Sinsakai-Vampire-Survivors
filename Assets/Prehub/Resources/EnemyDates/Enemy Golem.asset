@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81e8c8c426ca59745bd47e72aac3fe64, type: 3}
-  m_Name: Enemy Skull
+  m_Name: Enemy Golem
   m_EditorClassIdentifier: 
-  _enemyName: Skull
+  _enemyName: Golem
   _model: {fileID: -9010615838638220262, guid: 26f2fab31eacb6948aaee40453cfc60b, type: 3}
   _animator: {fileID: 9100000, guid: a0fda547afbb49544bb6c05bdbc18b71, type: 2}
-  _maxHP: 3
+  _maxHP: 5
   _gold: 0

@@ -17,10 +17,10 @@ public class PlayerAttackController : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer > 3f)
+        if (_timer > 1f)
         {
             WeapActive();
-            _timer -= 3f;
+            _timer -= 1f;
         }
 
     }

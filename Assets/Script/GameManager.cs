@@ -27,10 +27,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && _player)
         {
-            _isPause = !_isPause;
-            _pausePanal.SetActive(_isPause);
+            IsPause();
         }
     }
 
@@ -47,6 +46,12 @@ public class GameManager : MonoBehaviour
         {
             _finishPanel.transform.GetChild(2).gameObject.SetActive(true);
         }
+    }
+
+    public void IsPause()
+    {
+        _isPause = !_isPause;
+        _pausePanal.SetActive(_isPause);
     }
 
     /// <summary>
