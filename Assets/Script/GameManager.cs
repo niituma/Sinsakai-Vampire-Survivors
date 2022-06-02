@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        _isPause = true;
         var timer = FindObjectOfType<Timer>();
         _finishPanel.SetActive(true);
         if (timer._minute >= 2)

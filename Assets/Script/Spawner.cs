@@ -9,21 +9,25 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("最大スポーン数")] int _prefabCapacity = 30;
     [SerializeField, Tooltip("最初に一気にスポーンする割合"), Range(0, 100)] int _startInstantiateRatio = 10;
 
-    float _timer = 0.0f;
-    float _fadetimer = 0.0f;
+    float _countTimer = 0.0f;
+    [SerializeField]float _fadeTiming = 0.0f;
     Vector3 _position = new Vector3(0, 0, 0);
     GameObject _player;
+    Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
     enum Enemy
     {
         Bat,
-        Skull
+        Skull,
+        Slime,
+        Golem
     }
 
     Enemy _enemy = Enemy.Bat;
 
     private void Start()
     {
+        _gameTimer = FindObjectOfType<Timer>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_prefabCapacity);
@@ -35,18 +39,17 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        _timer += Time.deltaTime;
-        _fadetimer += Time.deltaTime;
-        if (_fadetimer > 20f)
+        _countTimer += Time.deltaTime;
+        if (_fadeTiming > _gameTimer._minute)
         {
             FadeSpawn();
-            _fadetimer = 0.0f;
+            _fadeTiming = 0.0f;
         }
 
-        if (_timer > _time)
+        if (_countTimer > _time)
         {
             Spawn();
-            _timer -= _time;
+            _countTimer -= _time;
         }
     }
 
