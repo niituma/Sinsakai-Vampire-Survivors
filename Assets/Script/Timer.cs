@@ -8,13 +8,7 @@ public class Timer : MonoBehaviour
     float _second = 0;
     public int _minute { get; private set; }
     float _resetTime = 0;
-    TextMeshProUGUI _text;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _text = GetComponent<TextMeshProUGUI>();
-    }
+    [SerializeField] TextMeshProUGUI _text;
 
     // Update is called once per frame
     void Update()
