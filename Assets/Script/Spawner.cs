@@ -12,7 +12,8 @@ public class Spawner : MonoBehaviour
     float _countTimer = 0.0f;
     [SerializeField]float _fadeTiming = 0.0f;
     [SerializeField] float _changeEnemyTiming = 5.0f;
-    Vector3 _position = new Vector3(0, 0, 0);
+    float _cRad = 0.0f;
+    [SerializeField] bool _isCircleSpawn = false;
     GameObject _player;
     Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
@@ -83,16 +84,20 @@ public class Spawner : MonoBehaviour
         script.GetComponent<SpriteRenderer>().sprite = _date._model;
         script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
 
-        _position = SpawnRandomPos() + _player.transform.position;
+        var SpawnPos = _isCircleSpawn ? CirclePos(): SpawnRandomPos() + _player.transform.position;
 
-        script.transform.position = _position;
+        script.transform.position = SpawnPos;
     }
 
     void FadeSpawn()
     {
-        for (int i = 0; i < 20; ++i)
+        for (int i = 0; i < 30; ++i)
         {
             Spawn();
+        }
+        if (_isCircleSpawn)
+        {
+            _isCircleSpawn = false;
         }
         return;
     }
@@ -115,6 +120,20 @@ public class Spawner : MonoBehaviour
         }
 
         pos.z = 0;
+
+        return pos;
+    }
+
+    Vector3 CirclePos()
+    {
+        Vector3 pos = new Vector3();
+
+        pos.x = _player.transform.position.x + 10 * Mathf.Cos(_cRad);
+        pos.y = _player.transform.position.y + 10 * Mathf.Sin(_cRad);
+
+        pos.z = 0;
+
+        _cRad += 1f;
 
         return pos;
     }
