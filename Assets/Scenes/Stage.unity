@@ -443,7 +443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _godMode: 0
   _maxhp: 200
-  _gameManager: {fileID: 1067814398}
   _slider: {fileID: 965749577}
 --- !u!114 &131552342
 MonoBehaviour:
@@ -700,22 +699,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1067814398}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: IsPause
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -795,7 +782,7 @@ RectTransform:
   - {fileID: 1260447949}
   - {fileID: 1081855721}
   m_Father: {fileID: 1230916397}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -886,22 +873,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1067814398}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: IsPause
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1089,7 +1064,7 @@ RectTransform:
   - {fileID: 1635832878}
   - {fileID: 858030886}
   m_Father: {fileID: 1230916397}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1927,7 +1902,7 @@ RectTransform:
   m_Children:
   - {fileID: 1183552308}
   m_Father: {fileID: 1230916397}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2184,8 +2159,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1067814398}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1067814400}
+        m_TargetAssemblyTypeName: SystemController, Assembly-CSharp
         m_MethodName: IsPause
         m_Mode: 1
         m_Arguments:
@@ -2918,7 +2893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1067814399}
-  - component: {fileID: 1067814398}
+  - component: {fileID: 1067814400}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2926,24 +2901,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1067814398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067814397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb883a50657c5dc4285d9bc8a430a9b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _expSlider: {fileID: 1123440898}
-  _expValue: 5
-  _levelText: {fileID: 919178298}
-  _finishPanel: {fileID: 205282751}
-  _pausePanal: {fileID: 368977363}
-  _skillSelectPanal: {fileID: 0}
 --- !u!4 &1067814399
 Transform:
   m_ObjectHideFlags: 0
@@ -2959,6 +2916,22 @@ Transform:
   m_Father: {fileID: 453796599}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1067814400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067814397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adce4e6afe86a764591b8401089503f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _expSlider: {fileID: 1123440898}
+  _levelText: {fileID: 919178298}
+  _finishPanel: {fileID: 205282751}
+  _pausePanal: {fileID: 368977363}
 --- !u!1 &1074489114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,9 +3780,9 @@ RectTransform:
   - {fileID: 1123440897}
   - {fileID: 1965244010}
   - {fileID: 595505110}
+  - {fileID: 656678872}
   - {fileID: 205282752}
   - {fileID: 368977364}
-  - {fileID: 656678872}
   - {fileID: 46842309}
   m_Father: {fileID: 425870918}
   m_RootOrder: 0
@@ -4783,22 +4756,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1067814398}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: IsPause
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -8,7 +8,6 @@ public class PlayerHPController : MonoBehaviour
 {
     [SerializeField, Tooltip("ñ≥ìGÉÇÅ[Éh")] bool _godMode;
     [SerializeField, Tooltip("ç≈ëÂHP")] float _maxhp = 200;
-    [SerializeField] GameManager _gameManager;
     float _currenthp;
     float _damage = 10;
 
@@ -27,7 +26,7 @@ public class PlayerHPController : MonoBehaviour
         if (_currenthp <= 0)
         {
             Destroy(gameObject);
-            _gameManager.FinishGame();
+            GameManager.Instance.FinishGame();
         }
     }
     public void Damege()

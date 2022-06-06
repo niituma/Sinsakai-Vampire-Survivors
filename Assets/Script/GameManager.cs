@@ -4,40 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
     static private GameManager _instance = new GameManager();
     static public GameManager Instance => _instance;
+    private GameManager() { }
     static public int Level => _instance._level;
-
-    [SerializeField] Slider _expSlider;
-    [SerializeField] int _expValue = 5;
-    [SerializeField] TextMeshProUGUI _levelText;
-    [SerializeField] GameObject _finishPanel;
-    [SerializeField] GameObject _pausePanal;
-    [SerializeField] GameObject _skillSelectPanal;
-    int _stackLevelup = 0;
-    int _level = 0;
-    public bool _isPause { get; private set; } = false;
 
     List<int> _passive = new List<int>();
 
-    public Slider ExpSlider { get; set; }
+    int _stackLevelup = 0;
+    int _level = 0;
+    int _expValue = 5;
+    public Slider _expSlider { get; set; }
+    public TextMeshProUGUI _levelText { get; set; }
+    public GameObject _finishPanel { get; set; }
+    public GameObject _pausePanal { get; set; }
+    public bool _isPause { get; private set; } = false;
+
+
     PlayerController _player = null;
     SkillSelect _sklSelect = null;
 
     // Start is called before the first frame update
-    void Start()
+    public void Setup()
     {
-        _player = FindObjectOfType<PlayerController>();
-        _sklSelect = FindObjectOfType<SkillSelect>();
+        _player = GameObject.FindObjectOfType<PlayerController>();
+        _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
         _expSlider.maxValue = _expValue;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Pause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _player && !_skillSelectPanal)
+        if (Input.GetKeyDown(KeyCode.Escape) && _player && !_sklSelect._isSelect)
         {
             IsPause();
         }
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void FinishGame()
     {
         _isPause = true;
-        var timer = FindObjectOfType<Timer>();
+        var timer = GameObject.FindObjectOfType<Timer>();
         _finishPanel.SetActive(true);
         if (timer._minute >= 2)
         {
@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
             _expValue += _expValue;
             _expSlider.maxValue = _expValue;
 
-            _skillSelectPanal.SetActive(true);
             _isPause = true;
         }
     }

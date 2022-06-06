@@ -11,12 +11,13 @@ public class SkillSelect : MonoBehaviour
     List<UnityEngine.UI.Text> _selectText = new List<UnityEngine.UI.Text>();
     CanvasGroup _canvas;
 
+    public bool _isSelect { get; private set; } = false;
+
     bool _startEvent = false;
 
     private void Awake()
     {
         _canvas = GetComponent<CanvasGroup>();
-        //_canvas.alpha = 0;
     }
 
     void Start()
@@ -53,6 +54,7 @@ public class SkillSelect : MonoBehaviour
 
     public void SelectStart()
     {
+        _isSelect = true;
         _canvas.alpha = 1;
 
         List<SkillSelectTable> table = new List<SkillSelectTable>();
@@ -86,7 +88,8 @@ public class SkillSelect : MonoBehaviour
     public void OnClick(int index)
     {
         GameManager.Instance.LevelUpSelect(_selectTable[index]);
-
+        _isSelect = false;
+        GameManager.Instance.IsPause();
         _canvas.alpha = 0;
     }
 }

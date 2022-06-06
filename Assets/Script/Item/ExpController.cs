@@ -7,7 +7,6 @@ public class ExpController : Itembase
     [SerializeField] int _expvalue = 1;
     protected override void GetItem()
     {
-        var gamemanager = FindObjectOfType<GameManager>();
-        gamemanager.AddExp(_expvalue);
+        GameManager.Instance.AddExp(_expvalue);
     }
 }

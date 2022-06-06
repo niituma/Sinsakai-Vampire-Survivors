@@ -20,11 +20,10 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D _rb;
     PlayerHPController _hp;
-    GameManager _gm;
     Animator _anim;
 
     public Vector2 Lastdir { get => _lastdir; set => _lastdir = value; }
-
+    AddOrignalMethod Method = new AddOrignalMethod();
 
     private void Awake()
     {
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         _hp = GetComponent<PlayerHPController>();
         _rb = GetComponent<Rigidbody2D>();
-        _gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -46,7 +44,6 @@ public class PlayerController : MonoBehaviour
         _v = Input.GetAxisRaw("Vertical");
         _dir = new Vector2(_h, _v);
 
-
         if (Input.GetButtonDown("Jump") && _isMoving && !_isStepMoving)
         {
             var _scale = transform.localScale;
@@ -55,8 +52,8 @@ public class PlayerController : MonoBehaviour
             _isMoving = false;
             _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed * _lastdir.x, _stepSpeed * _lastdir.y) :
                 _rb.velocity = new Vector2(_stepSpeed * _h, _stepSpeed * _v);
-            StartCoroutine(DelayMethod(_stepMoveCooltime, () => _isStepMoving = false));
-            StartCoroutine(DelayMethod(_moveCooltime, () => _isMoving = true));
+            StartCoroutine(Method.DelayMethod(_stepMoveCooltime, () => _isStepMoving = false));
+            StartCoroutine(Method.DelayMethod(_moveCooltime, () => _isMoving = true));
         }
     }
     private void FixedUpdate()
@@ -95,22 +92,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            ISkill newSkill = null;
+            ISkill newskill = null;
             switch ((SkillDef)skillId)
             {
                 case SkillDef.ShotBullet:
-                    newSkill = new ShotBullet();
+                    newskill = new ShotBullet();
                     break;
 
                 case SkillDef.AreaAttack:
-                    newSkill = new AreaAttack();
+                    newskill = new AreaAttack();
                     break;
             }
 
-            if (newSkill != null)
+            if (newskill != null)
             {
-                newSkill.Setup();
-                _skill.Add(newSkill);
+                newskill.Setup();
+                _skill.Add(newskill);
             }
         }
     }
@@ -134,11 +131,5 @@ public class PlayerController : MonoBehaviour
         _anim.SetFloat("LastMoveX", _lastdir.x);
         _anim.SetFloat("LastMoveY", _lastdir.y);
         _anim.SetFloat("Input", _dir.magnitude);
-    }
-
-    private IEnumerator DelayMethod(float seconds, Action action)
-    {
-        yield return new WaitForSeconds(seconds);
-        action?.Invoke();
     }
 }

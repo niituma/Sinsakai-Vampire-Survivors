@@ -6,7 +6,6 @@ public class Enemybase : MonoBehaviour, IObjectPool
 {
     [SerializeField] float _speed = 4f;
     GameObject _player;
-    GameManager _gameManager;
     ItemSpawner _itemSpawner;
     EnemyHPController _HP;
     Rigidbody2D _rb;
@@ -14,7 +13,6 @@ public class Enemybase : MonoBehaviour, IObjectPool
     void Start()
     {
         _HP = GetComponent<EnemyHPController>();
-        _gameManager = FindObjectOfType<GameManager>();
         _itemSpawner = FindObjectOfType<ItemSpawner>();
         _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("Player");
