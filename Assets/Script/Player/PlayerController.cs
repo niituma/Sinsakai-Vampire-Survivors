@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
+using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     Vector2 _dir;
     Vector2 _lastdir = new Vector2(0, -1);
 
+    List<ISkill> _skill = new List<ISkill>();
+
     Rigidbody2D _rb;
     PlayerHPController _hp;
     GameManager _gm;
@@ -23,6 +25,11 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 Lastdir { get => _lastdir; set => _lastdir = value; }
 
+
+    private void Awake()
+    {
+        AddSkill(1);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +82,35 @@ public class PlayerController : MonoBehaviour
             else
             {
                 collision.gameObject.GetComponent<EnemyHPController>().Damege(1);
+            }
+        }
+    }
+
+    public void AddSkill(int skillId)
+    {
+        var having = _skill.Where(s => s.SkillId == (SkillDef)skillId);
+        if (having.Count() > 0)
+        {
+            having.Single().Levelup();
+        }
+        else
+        {
+            ISkill newSkill = null;
+            switch ((SkillDef)skillId)
+            {
+                case SkillDef.ShotBullet:
+                    newSkill = new ShotBullet();
+                    break;
+
+                case SkillDef.AreaAttack:
+                    newSkill = new AreaAttack();
+                    break;
+            }
+
+            if (newSkill != null)
+            {
+                newSkill.Setup();
+                _skill.Add(newSkill);
             }
         }
     }

@@ -6,22 +6,31 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    static private GameManager _instance = new GameManager();
+    static public GameManager Instance => _instance;
+    static public int Level => _instance._level;
+
     [SerializeField] Slider _expSlider;
     [SerializeField] int _expValue = 5;
     [SerializeField] TextMeshProUGUI _levelText;
     [SerializeField] GameObject _finishPanel;
     [SerializeField] GameObject _pausePanal;
     [SerializeField] GameObject _skillSelectPanal;
+    int _stackLevelup = 0;
     int _level = 0;
     public bool _isPause { get; private set; } = false;
 
+    List<int> _passive = new List<int>();
+
     public Slider ExpSlider { get; set; }
-    GameObject _player;
+    PlayerController _player = null;
+    SkillSelect _sklSelect = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = FindObjectOfType<PlayerController>();
+        _sklSelect = FindObjectOfType<SkillSelect>();
         _expSlider.maxValue = _expValue;
     }
 
@@ -55,6 +64,34 @@ public class GameManager : MonoBehaviour
         _pausePanal.SetActive(_isPause);
     }
 
+    public void LevelUpSelect(SkillSelectTable table)
+    {
+        switch (table.Type)
+        {
+            case SelectType.Skill:
+                _player.AddSkill(table.TargetId);
+                break;
+
+            case SelectType.Passive:
+                _passive.Add(table.TargetId);
+                break;
+
+            case SelectType.Execute:
+                //TODO:
+                break;
+        }
+
+        if (_stackLevelup > 0)
+        {
+            _sklSelect.SelectStartDelay();
+            _stackLevelup--;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
     /// <summary>
     /// ŒoŒ±’lŽæ“¾
     /// </summary>
@@ -66,6 +103,7 @@ public class GameManager : MonoBehaviour
         if (_expSlider.value == _expValue)
         {
             ++_level;
+            _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
             _expValue += _expValue;
