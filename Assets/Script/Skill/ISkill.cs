@@ -1,15 +1,15 @@
-interface ISkill
-{
-    SkillDef SkillId { get; }
-    void Setup();
-    void SkillUpdate();
-    void Levelup();
-}
+//interface ISkill
+//{
+//    SkillDef SkillId { get; }
+//    void Setup();
+//    void SkillUpdate();
+//    void Levelup();
+//}
 
-public enum SkillDef
-{
-    Invalid = 0,
-    MeleeWeapon = 1,
-    ShotBullet = 2,
-    AreaAttack = 3,
-}
+//public enum SkillDef
+//{
+//    Invalid = 0,
+//    MeleeWeapon = 1,
+//    ShotBullet = 2,
+//    AreaAttack = 3,
+//}

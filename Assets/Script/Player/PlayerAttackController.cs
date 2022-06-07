@@ -5,19 +5,12 @@ using System.Linq;
 
 public class PlayerAttackController : MonoBehaviour
 {
-    [SerializeField] GameObject _weap;
-    Skillbase skill;
-    float _timer = 0;
-    List<GameObject> _skills = new List<GameObject>();
+    [SerializeField] List<GameObject> _skills = new List<GameObject>();
 
     private void Awake()
     {
         AddSkill(1);
     }
-    //private void Start()
-    //{
-    //    skill = _weap.GetComponent<Skillbase>();
-    //}
     // Update is called once per frame
     void Update()
     {
@@ -25,12 +18,6 @@ public class PlayerAttackController : MonoBehaviour
         {
             skill.GetComponent<ISkill>().SkillUpdate();
         }
-        //_timer += Time.deltaTime;
-        //if (_timer > skill._cooldown)
-        //{
-        //    skill.ActiveSkill();
-        //    _timer -= skill._cooldown;
-        //}
     }
     public void AddSkill(int skillId)
     {
@@ -45,17 +32,13 @@ public class PlayerAttackController : MonoBehaviour
             switch ((SkillDef)skillId)
             {
                 case SkillDef.MeleeWeapon:
-                    //newskill = new MeleeWeapon();
-                    GameObject skill = new GameObject();
-                    skill.AddComponent<MeleeWeapon>();
+                    newskill = Instantiate(Resources.Load<GameObject>("Skills/Whips"), transform.position, Quaternion.identity);
                     break;
 
                 case SkillDef.ShotBullet:
-                    //newskill = new ShotBullet();
                     break;
 
                 case SkillDef.AreaAttack:
-                    //newskill = new AreaAttack();
                     break;
             }
 

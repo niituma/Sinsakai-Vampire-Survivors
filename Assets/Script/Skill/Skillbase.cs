@@ -9,10 +9,26 @@ public class Skillbase : MonoBehaviour
 
     protected float _timer = 0;
 
+    protected float _skillLevel = 1;
+
     public float _cooldown { get; set; } = 2;
     protected AddOrignalMethod Method = new AddOrignalMethod();
     public virtual void ActiveSkill()
     {
 
     }
+}
+interface ISkill
+{
+    SkillDef SkillId { get; }
+    void Setup();
+    void SkillUpdate();
+    void Levelup();
+}
+public enum SkillDef
+{
+    Invalid = 0,
+    MeleeWeapon = 1,
+    ShotBullet = 2,
+    AreaAttack = 3,
 }

@@ -55,9 +55,9 @@ public class Enemybase : MonoBehaviour, IObjectPool
     }
     public void Destroy()
     {
-        gameObject.SetActive(false);
-        _isActrive = false;
         var item = _itemSpawner.Spawn();
         item.transform.position = transform.position;
+        gameObject.SetActive(false);
+        _isActrive = false;
     }
 }

@@ -10,13 +10,15 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("最初に一気にスポーンする割合"), Range(0, 100)] int _startInstantiateRatio = 10;
 
     float _countTimer = 0.0f;
-    [SerializeField]float _fadeTiming = 0.0f;
+    [SerializeField] float _fadeTiming = 0.0f;
     [SerializeField] float _changeEnemyTiming = 5.0f;
     float _cRad = 0.0f;
     [SerializeField] bool _isCircleSpawn = false;
+    bool _isFade = false;
     GameObject _player;
     Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
+    AddOrignalMethod Method = new AddOrignalMethod();
     enum Enemy
     {
         Bat,
@@ -42,17 +44,25 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         _countTimer += Time.deltaTime;
-        
+
 
         if (_fadeTiming == _gameTimer._minute)
         {
             _fadeTiming += _fadeTiming;
-            FadeSpawn();
+            _isFade = true;
+            StartCoroutine(Method.DelayMethod(60f,() => _isFade = false));
         }
 
         if (_countTimer > _time)
         {
-            Spawn();
+            if (_isFade)
+            {
+                FadeSpawn();
+            }
+            else
+            {
+                Spawn();
+            }
             _countTimer -= _time;
         }
     }
@@ -72,7 +82,7 @@ public class Spawner : MonoBehaviour
 
         if (_changeEnemyTiming <= _gameTimer._minute)
         {
-            if((int)_enemy != System.Enum.GetValues(typeof(Enemy)).Length - 1)
+            if ((int)_enemy != System.Enum.GetValues(typeof(Enemy)).Length - 1)
             {
                 _enemy++;
                 _changeEnemyTiming += _changeEnemyTiming;
@@ -84,7 +94,7 @@ public class Spawner : MonoBehaviour
         script.GetComponent<SpriteRenderer>().sprite = _date._model;
         script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
 
-        var SpawnPos = _isCircleSpawn ? CirclePos(): SpawnRandomPos() + _player.transform.position;
+        var SpawnPos = _isCircleSpawn ? CirclePos() : SpawnRandomPos() + _player.transform.position;
 
         script.transform.position = SpawnPos;
     }
@@ -106,17 +116,17 @@ public class Spawner : MonoBehaviour
     {
         Vector3 pos = new Vector3();
 
-        float f = UnityEngine.Random.value > 0.5f ? -1f : 1f;
+        float f = Random.value > 0.5f ? -1f : 1f;
 
-        if (UnityEngine.Random.value > 0.5f)
+        if (Random.value > 0.5f)
         {
-            pos.x = UnityEngine.Random.Range(-_spawnArea.x, _spawnArea.x);
+            pos.x = Random.Range(-_spawnArea.x, _spawnArea.x);
             pos.y = _spawnArea.y * f;
         }
         else
         {
             pos.x = _spawnArea.x * f;
-            pos.y = UnityEngine.Random.Range(-_spawnArea.y, _spawnArea.y);
+            pos.y = Random.Range(-_spawnArea.y, _spawnArea.y);
         }
 
         pos.z = 0;
@@ -128,8 +138,8 @@ public class Spawner : MonoBehaviour
     {
         Vector3 pos = new Vector3();
 
-        pos.x = _player.transform.position.x + 10 * Mathf.Cos(_cRad);
-        pos.y = _player.transform.position.y + 10 * Mathf.Sin(_cRad);
+        pos.x = _player.transform.position.x + 13 * Mathf.Cos(_cRad);
+        pos.y = _player.transform.position.y + 13 * Mathf.Sin(_cRad);
 
         pos.z = 0;
 
