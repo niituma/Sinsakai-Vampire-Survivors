@@ -2,13 +2,14 @@ interface ISkill
 {
     SkillDef SkillId { get; }
     void Setup();
-    void Update();
+    void SkillUpdate();
     void Levelup();
 }
 
 public enum SkillDef
 {
     Invalid = 0,
-    ShotBullet = 1,
-    AreaAttack = 2,
+    MeleeWeapon = 1,
+    ShotBullet = 2,
+    AreaAttack = 3,
 }

@@ -22,13 +22,13 @@ public class GameData
 {
     static public List<SkillSelectTable> SkillSelectTable = new List<SkillSelectTable>()
     {
-        new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 1, Name = "–‚–@‚Ìñ", Level = 0, Probability = 80 },
-        new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 2, Name = "Œ‹ŠE", Level = 0, Probability = 80 },
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 1, Name = "ƒ€ƒ`", Level = 0, Probability = 60 },
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 2, Name = "–‚–@‚Ìñ", Level = 0, Probability = 80 },
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 3, Name = "Œ‹ŠE", Level = 0, Probability = 80 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 1, Name = "UŒ‚UP", Level = 0, Probability = 40 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 2, Name = "‘¬“xUP", Level = 0, Probability = 20 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 3, Name = "UŒ‚‘¬“xUP", Level = 5, Probability = 10 },
-        new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 1, Name = "‰ñ•œ", Level = 0, Probability = 90 },
-        new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 2, Name = "ƒS[ƒ‹ƒh", Level = 0, Probability = 40 }
+        new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 1, Name = "‰ñ•œ", Level = 0, Probability = 90 }
     };
 
     static public List<int> LevelTable = new List<int>()

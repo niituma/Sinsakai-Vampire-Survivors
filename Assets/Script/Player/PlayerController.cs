@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
     Vector2 _dir;
     Vector2 _lastdir = new Vector2(0, -1);
 
-    List<ISkill> _skill = new List<ISkill>();
-
     Rigidbody2D _rb;
     PlayerHPController _hp;
     Animator _anim;
@@ -25,10 +23,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 Lastdir { get => _lastdir; set => _lastdir = value; }
     AddOrignalMethod Method = new AddOrignalMethod();
 
-    private void Awake()
-    {
-        AddSkill(1);
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -79,35 +73,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 collision.gameObject.GetComponent<EnemyHPController>().Damege(1);
-            }
-        }
-    }
-
-    public void AddSkill(int skillId)
-    {
-        var having = _skill.Where(s => s.SkillId == (SkillDef)skillId);
-        if (having.Count() > 0)
-        {
-            having.Single().Levelup();
-        }
-        else
-        {
-            ISkill newskill = null;
-            switch ((SkillDef)skillId)
-            {
-                case SkillDef.ShotBullet:
-                    newskill = new ShotBullet();
-                    break;
-
-                case SkillDef.AreaAttack:
-                    newskill = new AreaAttack();
-                    break;
-            }
-
-            if (newskill != null)
-            {
-                newskill.Setup();
-                _skill.Add(newskill);
             }
         }
     }

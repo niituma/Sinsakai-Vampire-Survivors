@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7241671260072771091}
   - component: {fileID: 8763377708455755905}
   - component: {fileID: 881812370030479578}
+  - component: {fileID: 9029105866821912214}
   m_Layer: 0
   m_Name: Weap
   m_TagString: Untagged
@@ -154,5 +155,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1174e894e2b53e947ac449d6c9d54497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9029105866821912214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307992453383018195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d652a8814c520e943ae8b15e18104ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -23,15 +23,16 @@ public class GameManager
     public bool _isPause { get; private set; } = false;
 
 
-    PlayerController _player = null;
+    PlayerAttackController _player = null;
     SkillSelect _sklSelect = null;
 
     // Start is called before the first frame update
     public void Setup()
     {
-        _player = GameObject.FindObjectOfType<PlayerController>();
+        _player = GameObject.FindObjectOfType<PlayerAttackController>();
         _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
         _expSlider.maxValue = _expValue;
+        _isPause = false;
     }
 
     // Update is called once per frame
@@ -63,7 +64,6 @@ public class GameManager
         _isPause = !_isPause;
         _pausePanal.SetActive(_isPause);
     }
-
     public void LevelUpSelect(SkillSelectTable table)
     {
         switch (table.Type)
