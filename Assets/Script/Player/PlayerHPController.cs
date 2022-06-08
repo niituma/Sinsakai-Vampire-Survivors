@@ -7,9 +7,12 @@ using DG.Tweening;
 public class PlayerHPController : MonoBehaviour
 {
     [SerializeField, Tooltip("無敵モード")] bool _godMode;
-    [SerializeField, Tooltip("最大HP")] float _maxhp = 200;
-    float _currenthp;
-    float _damage = 10;
+    [SerializeField, Tooltip("最大HP")] float _maxhp = 200f;
+    float _currenthp = 0f;
+    float _damage = 5f;
+    [SerializeField, Tooltip("ダメージを受けたら一定時間無敵にする時間")] float _notdamageTime = 0.1f;
+    bool _isdamaging = false;
+    AddOrignalMethod Method = new AddOrignalMethod();
 
     [SerializeField] Slider _slider;
 
@@ -31,12 +34,13 @@ public class PlayerHPController : MonoBehaviour
     }
     public void Damege()
     {
-        if (!_godMode)
+        if (!_godMode && !_isdamaging)
         {
+            _isdamaging = true;
             var damage = _damage;
             _currenthp = _currenthp - damage;
-            float value = _currenthp / _maxhp;
-            DOTween.To(() => _slider.value, x => _slider.value = x, value, 0.5f);
+            _slider.value = _currenthp / _maxhp;
+            StartCoroutine(Method.DelayMethod(_notdamageTime, () => _isdamaging = false)) ;
         }
     }
     public void Heel(float value)
