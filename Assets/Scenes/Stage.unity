@@ -1781,7 +1781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7592889836151063202, guid: 324cbf4322d40634ca5e18bf6d535bc5, type: 3}
   _root: {fileID: 850119218}
-  _prefabCapacity: 30
+  _prefabCapacity: 100
 --- !u!114 &650436532
 MonoBehaviour:
   m_ObjectHideFlags: 0
