@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _godMode: 0
   _maxhp: 200
-  _notdamageTime: 0.5
+  _notdamageTime: 0.3
   _slider: {fileID: 1494947360}
 --- !u!114 &131552342
 MonoBehaviour:
