@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHPController : MonoBehaviour
 {
-    public int _currenthp { get; set; }
+    public int _currenthp { get; set; } = 1;
 
     // Update is called once per frame
     void Update()

@@ -32,7 +32,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
                 scale.x = -1;
                 transform.localScale = scale;
             }
-            else if(transform.position.x < _player.transform.position.x && scale.x != 1)
+            else if (transform.position.x < _player.transform.position.x && scale.x != 1)
             {
                 scale.x = 1;
                 transform.localScale = scale;
@@ -56,7 +56,10 @@ public class Enemybase : MonoBehaviour, IObjectPool
     public void Destroy()
     {
         var item = _itemSpawner.Spawn();
-        item.transform.position = transform.position;
+        if (item)
+        {
+            item.transform.position = transform.position;
+        }
         gameObject.SetActive(false);
         _isActrive = false;
     }

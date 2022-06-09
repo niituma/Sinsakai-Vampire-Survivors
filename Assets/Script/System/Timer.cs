@@ -5,8 +5,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    float _second = 0;
-    public int _minute { get; private set; }
+    public float _second { get; private set; } = 0;
+    public int _minute { get; private set; } = 0;
     float _resetTime = 0;
     [SerializeField] TextMeshProUGUI _text;
 

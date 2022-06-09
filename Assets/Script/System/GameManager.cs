@@ -21,6 +21,8 @@ public class GameManager
     public GameObject _finishPanel { get; set; }
     public GameObject _pausePanal { get; set; }
     public bool _isPause { get; private set; } = false;
+    public int _result_timeminute { get; set; }
+    public int _result_timesecond { get; set; }
 
 
     PlayerAttackController _player = null;
@@ -48,6 +50,8 @@ public class GameManager
     {
         _isPause = true;
         var timer = GameObject.FindObjectOfType<Timer>();
+        _result_timeminute = timer._minute;
+        _result_timesecond = (int)timer._second;
         _finishPanel.SetActive(true);
         if (timer._minute >= 2)
         {

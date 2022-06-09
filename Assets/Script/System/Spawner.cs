@@ -14,6 +14,11 @@ public class Spawner : MonoBehaviour
     [SerializeField] float _changeEnemyTiming = 5.0f;
     float _cRad = 0.0f;
     [SerializeField] bool _isCircleSpawn = false;
+
+    [Header("BossƒXƒ|[ƒ“‚ÌÝ’è")]
+    [SerializeField] GameObject _boss;
+    [SerializeField] float _bossSpawnTime = 10f;
+    [SerializeField] int _bossHP = 100;
     bool _isFade = false;
     GameObject _player;
     Timer _gameTimer;
@@ -50,7 +55,15 @@ public class Spawner : MonoBehaviour
         {
             _fadeTiming += _fadeTiming;
             _isFade = true;
-            StartCoroutine(Method.DelayMethod(60f,() => _isFade = false));
+            StartCoroutine(Method.DelayMethod(60f, () => _isFade = false));
+        }
+
+        if (_bossSpawnTime == _gameTimer._minute)
+        {
+            var boss = Instantiate(_boss, SpawnRandomPos() + _player.transform.position, Quaternion.identity);
+            boss.transform.SetParent(_root);
+            boss.GetComponent<EnemyHPController>()._currenthp = _bossHP;
+            _bossSpawnTime += 1;
         }
 
         if (_countTimer > _time)
