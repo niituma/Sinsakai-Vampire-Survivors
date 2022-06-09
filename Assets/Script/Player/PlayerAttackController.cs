@@ -9,7 +9,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Awake()
     {
-        AddSkill(1);
+        AddSkill(2);
     }
     // Update is called once per frame
     void Update()
@@ -36,6 +36,7 @@ public class PlayerAttackController : MonoBehaviour
                     break;
 
                 case SkillDef.ShotBullet:
+                    newskill = Instantiate(Resources.Load<GameObject>("Skills/ShotBullet"), transform.position, Quaternion.identity);
                     break;
 
                 case SkillDef.AreaAttack:

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 
@@ -12,6 +13,7 @@ public class GameManager
     static public int Level => _instance._level;
 
     List<int> _passive = new List<int>();
+    public List<Enemybase> _enemies { get; private set; } = new List<Enemybase>();
 
     int _stackLevelup = 0;
     int _level = 0;
@@ -24,14 +26,16 @@ public class GameManager
     public int _result_timeminute { get; set; }
     public int _result_timesecond { get; set; }
 
-
-    PlayerAttackController _player = null;
+    public GameObject _player { get; private set; } = null;
+    PlayerAttackController _playerAttack = null;
     SkillSelect _sklSelect = null;
 
     // Start is called before the first frame update
     public void Setup()
     {
-        _player = GameObject.FindObjectOfType<PlayerAttackController>();
+        _enemies = GameObject.FindObjectsOfType<Enemybase>(true).ToList();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerAttack = _player.GetComponent<PlayerAttackController>();
         _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
         _expSlider.maxValue = _expValue;
         _isPause = false;
@@ -40,7 +44,7 @@ public class GameManager
     // Update is called once per frame
     public void Pause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _player && !_sklSelect._isSelect)
+        if (Input.GetKeyDown(KeyCode.Escape) && _playerAttack && !_sklSelect._isSelect)
         {
             IsPause();
         }
@@ -73,7 +77,7 @@ public class GameManager
         switch (table.Type)
         {
             case SelectType.Skill:
-                _player.AddSkill(table.TargetId);
+                _playerAttack.AddSkill(table.TargetId);
                 break;
 
             case SelectType.Passive:

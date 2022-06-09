@@ -15,15 +15,16 @@ public class Spawner : MonoBehaviour
     float _cRad = 0.0f;
     [SerializeField] bool _isCircleSpawn = false;
 
-    [Header("Bossスポーンの設定")]
-    [SerializeField] GameObject _boss;
-    [SerializeField] float _bossSpawnTime = 10f;
-    [SerializeField] int _bossHP = 100;
     bool _isFade = false;
     GameObject _player;
     Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
     AddOrignalMethod Method = new AddOrignalMethod();
+
+    [Header("Bossスポーンの設定")]
+    [SerializeField] GameObject _boss;
+    [SerializeField] float _bossSpawnTime = 10f;
+    [SerializeField] int _bossHP = 100;
     enum Enemy
     {
         Bat,
@@ -40,7 +41,6 @@ public class Spawner : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_prefabCapacity);
-
         var StartPrefab = _prefabCapacity * ((float)_startInstantiateRatio / 100f);
 
         for (int i = 0; i < StartPrefab; ++i) Spawn();
