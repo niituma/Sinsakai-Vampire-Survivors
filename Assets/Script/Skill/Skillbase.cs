@@ -29,6 +29,7 @@ public enum SkillDef
 {
     Invalid = 0,
     MeleeWeapon = 1,
-    ShotBullet = 2,
-    AreaAttack = 3,
+    ShotMagic = 2,
+    Barrier = 3,
+    Bomb = 4,
 }

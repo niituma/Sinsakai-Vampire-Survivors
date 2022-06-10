@@ -2651,7 +2651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnArea: {x: 13, y: 8}
-  _time: 1
+  _time: 0.1
   _prefab: {fileID: -2620388822643326051, guid: 8bfbfa1d211a05b489c6b03c52d9ac3f, type: 3}
   _root: {fileID: 191008770}
   _prefabCapacity: 100

@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour, IObjectPool
     {
         if (collision.tag == "Enemy")
         {
-            var damge = UnityEngine.Random.Range(_mindamage, _maxdamage);
+            var damge = Random.Range(_mindamage, _maxdamage);
             collision.gameObject.GetComponent<EnemyHPController>().Damege(damge);
             Destroy();
         }

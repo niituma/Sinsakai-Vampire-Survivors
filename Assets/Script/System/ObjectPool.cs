@@ -7,6 +7,7 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
     T BaseObj = null;
     Transform Parent = null;
     List<T> Pool = new List<T>();
+    EnemyDate _date;
     int Index = 0;
 
     public List<T> GetPool { get => Pool; private set => Pool = value; }
@@ -44,7 +45,10 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
             Pooling(Obj);
         }
     }
-
+    public void LoadDate(EnemyDate date)
+    {
+        _date = date;
+    }
     public T Instantiate()
     {
         T ret = null;
@@ -53,7 +57,6 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
             int index = i;
 
             if (Pool[index].IsActive) continue;
-
             Pool[index].Create();
             ret = Pool[index];
             break;

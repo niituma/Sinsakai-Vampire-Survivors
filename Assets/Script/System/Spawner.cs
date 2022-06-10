@@ -86,12 +86,6 @@ public class Spawner : MonoBehaviour
         {
             return;
         }
-        var script = _enemyPool.Instantiate();
-
-        if (!script)
-        {
-            return;
-        }
 
         if (_changeEnemyTiming <= _gameTimer._minute)
         {
@@ -103,9 +97,14 @@ public class Spawner : MonoBehaviour
         }
 
         EnemyDate _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
-        script.GetComponent<EnemyHPController>()._currenthp = _date._maxHP;
-        script.GetComponent<SpriteRenderer>().sprite = _date._model;
-        script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
+        _enemyPool.LoadDate(_date);
+        var script = _enemyPool.Instantiate();
+
+        if (!script)
+        {
+            return;
+        }
+
 
         var SpawnPos = _isCircleSpawn ? CirclePos() : SpawnRandomPos() + _player.transform.position;
 

@@ -9,7 +9,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Awake()
     {
-        AddSkill(2);
+        AddSkill(3);
     }
     // Update is called once per frame
     void Update()
@@ -35,11 +35,15 @@ public class PlayerAttackController : MonoBehaviour
                     newskill = Instantiate(Resources.Load<GameObject>("Skills/Whips"), transform.position, Quaternion.identity);
                     break;
 
-                case SkillDef.ShotBullet:
+                case SkillDef.ShotMagic:
                     newskill = Instantiate(Resources.Load<GameObject>("Skills/ShotBullet"), transform.position, Quaternion.identity);
                     break;
 
-                case SkillDef.AreaAttack:
+                case SkillDef.Barrier:
+                    newskill = Instantiate(Resources.Load<GameObject>("Skills/Barrie"), transform.position, Quaternion.identity);
+                    break;
+
+                case SkillDef.Bomb:
                     break;
             }
 

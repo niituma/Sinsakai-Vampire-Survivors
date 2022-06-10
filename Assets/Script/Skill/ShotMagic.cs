@@ -5,7 +5,7 @@ using System.Linq;
 
 public class ShotMagic : Skillbase, ISkill
 {
-    public SkillDef SkillId => SkillDef.ShotBullet;
+    public SkillDef SkillId => SkillDef.ShotMagic;
     GameObject _player = null;
     [SerializeField] Bullet _bullet = null;
     int _prefabCapacity = 30;
