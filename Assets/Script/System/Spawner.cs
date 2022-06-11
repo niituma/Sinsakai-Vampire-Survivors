@@ -97,13 +97,16 @@ public class Spawner : MonoBehaviour
         }
 
         EnemyDate _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
-        _enemyPool.LoadDate(_date);
+        //_enemyPool.LoadDate(_date);
         var script = _enemyPool.Instantiate();
-
         if (!script)
         {
             return;
         }
+
+        script.GetComponent<EnemyHPController>()._currenthp = _date._maxHP;
+        script.GetComponent<SpriteRenderer>().sprite = _date._model;
+        script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
 
 
         var SpawnPos = _isCircleSpawn ? CirclePos() : SpawnRandomPos() + _player.transform.position;

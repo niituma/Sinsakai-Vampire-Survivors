@@ -21,6 +21,10 @@ public class Enemybase : MonoBehaviour, IObjectPool
     // Update is called once per frame
     void Update()
     {
+        if (_HP._currenthp <= 0)
+        {
+            Destroy();
+        }
         if (_player)
         {
             Vector2 Dir = (_player.transform.position - transform.position).normalized;

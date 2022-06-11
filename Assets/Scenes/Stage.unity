@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7592889836151063202, guid: 324cbf4322d40634ca5e18bf6d535bc5, type: 3}
   _root: {fileID: 850119218}
-  _prefabCapacity: 100
+  _prefabCapacity: 1000
 --- !u!114 &650436532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,11 +1801,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnArea: {x: 13, y: 8}
-  _time: 1
+  _time: 0.8
   _prefab: {fileID: -2620388822643326051, guid: 8bfbfa1d211a05b489c6b03c52d9ac3f, type: 3}
   _root: {fileID: 1007829887}
-  _prefabCapacity: 100
-  _startInstantiateRatio: 10
+  _prefabCapacity: 1000
+  _startInstantiateRatio: 1
   _fadeTiming: 1
   _changeEnemyTiming: 3
   _isCircleSpawn: 1

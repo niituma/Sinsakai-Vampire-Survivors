@@ -57,6 +57,7 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
             int index = i;
 
             if (Pool[index].IsActive) continue;
+
             Pool[index].Create();
             ret = Pool[index];
             break;
