@@ -31,5 +31,5 @@ public enum SkillDef
     MeleeWeapon = 1,
     ShotMagic = 2,
     Barrier = 3,
-    Bomb = 4,
+    Bomber = 4,
 }

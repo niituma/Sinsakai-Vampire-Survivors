@@ -19,6 +19,7 @@ public class Spawner : MonoBehaviour
     GameObject _player;
     Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
+    public EnemyDate _date { get; private set; }
     AddOrignalMethod Method = new AddOrignalMethod();
 
     [Header("BossÉXÉ|Å[ÉìÇÃê›íË")]
@@ -95,19 +96,13 @@ public class Spawner : MonoBehaviour
                 _changeEnemyTiming += _changeEnemyTiming;
             }
         }
-
-        EnemyDate _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
-        //_enemyPool.LoadDate(_date);
+        _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
+        _enemyPool.LoadDate(_date);
         var script = _enemyPool.Instantiate();
         if (!script)
         {
             return;
         }
-
-        script.GetComponent<EnemyHPController>()._currenthp = _date._maxHP;
-        script.GetComponent<SpriteRenderer>().sprite = _date._model;
-        script.GetComponent<Animator>().runtimeAnimatorController = _date._animator;
-
 
         var SpawnPos = _isCircleSpawn ? CirclePos() : SpawnRandomPos() + _player.transform.position;
 

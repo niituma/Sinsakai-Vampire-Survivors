@@ -26,11 +26,14 @@ public class Bullet : MonoBehaviour, IObjectPool
         _timer += Time.deltaTime;
         if (_timer > 1.0f)
         {
-            _timer = 0.0f;
             Destroy();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnDisable()
+    {
+        _timer = 0.0f;
+    }
+        private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
