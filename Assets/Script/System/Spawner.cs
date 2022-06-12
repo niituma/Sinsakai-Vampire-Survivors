@@ -56,7 +56,7 @@ public class Spawner : MonoBehaviour
         {
             _fadeTiming += _fadeTiming;
             _isFade = true;
-            StartCoroutine(Method.DelayMethod(60f, () => _isFade = false));
+            StartCoroutine(Method.DelayMethod(10f, () => _isFade = false));
         }
 
         if (_bossSpawnTime == _gameTimer._minute)
@@ -111,7 +111,7 @@ public class Spawner : MonoBehaviour
 
     void FadeSpawn()
     {
-        for (int i = 0; i < 30; ++i)
+        for (int i = 0; i < 15; ++i)
         {
             Spawn();
         }

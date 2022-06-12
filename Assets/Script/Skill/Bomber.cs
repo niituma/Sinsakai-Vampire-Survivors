@@ -8,18 +8,24 @@ public class Bomber : Skillbase, ISkill
     public SkillDef SkillId => SkillDef.Bomber;
     GameObject _player = null;
     [SerializeField] Bomb _Bomb = null;
+    int _ballnum = 3;
     int _prefabCapacity = 30;
     ObjectPool<Bomb> _BombPool = new ObjectPool<Bomb>();
     public void Setup()
     {
-        _cooldown = 1f;
+        _cooldown = 5f;
         _player = GameObject.FindGameObjectWithTag("Player");
         _BombPool.SetBaseObj(_Bomb, gameObject.transform);
         _BombPool.SetCapacity(_prefabCapacity);
     }
     public void SkillUpdate()
     {
-        ActiveSkill();
+        _timer += Time.deltaTime;
+        if (_timer >= _cooldown)
+        {
+            ActiveSkill();
+            _timer -= _cooldown;
+        }
     }
     public void Levelup()
     {
@@ -44,16 +50,16 @@ public class Bomber : Skillbase, ISkill
         {
             return;
         }
-        var script = _BombPool.Instantiate();
-
-        if (!script)
+        for (int i = 0; i < _ballnum; ++i)
         {
-            return;
+            var script = _BombPool.Instantiate();
+            if (!script)
+            {
+                break;
+            }
+            script.transform.position = _player.transform.position;
         }
-        var list = GameManager.Instance._enemies;
-        Enemybase target = list.Where(e => e.gameObject.activeSelf)
-            .OrderBy(e => Vector3.Distance(e.transform.position, _player.transform.position)).FirstOrDefault();
 
-        script.transform.position = _player.transform.position;
+
     }
 }

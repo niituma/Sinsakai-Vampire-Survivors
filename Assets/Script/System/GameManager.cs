@@ -17,7 +17,7 @@ public class GameManager
 
     int _stackLevelup = 0;
     int _level = 0;
-    int _expValue = 5;
+    int _expValue = 1;
     public Slider _expSlider { get; set; }
     public TextMeshProUGUI _levelText { get; set; }
     public GameObject _finishPanel { get; set; }
@@ -114,8 +114,7 @@ public class GameManager
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expValue += _expValue;
-            _expSlider.maxValue = _expValue;
+            _expSlider.maxValue += _expValue;
 
             _isPause = true;
         }

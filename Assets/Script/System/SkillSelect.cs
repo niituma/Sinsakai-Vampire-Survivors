@@ -9,6 +9,7 @@ public class SkillSelect : MonoBehaviour
 
     List<SkillSelectTable> _selectTable = new List<SkillSelectTable>();
     List<UnityEngine.UI.Text> _selectText = new List<UnityEngine.UI.Text>();
+    int _maxLevel = 5;
     CanvasGroup _canvas;
 
     public bool _isSelect { get; private set; } = false;
@@ -58,7 +59,7 @@ public class SkillSelect : MonoBehaviour
         _canvas.alpha = 1;
 
         List<SkillSelectTable> table = new List<SkillSelectTable>();
-        var list = GameData.SkillSelectTable.Where(s => GameManager.Level >= s.Level);
+        var list = GameData.SkillSelectTable.Where(s => _maxLevel != s.Level);
 
         int totalProb = list.Sum(s => s.Probability);
         int rand = Random.Range(0, totalProb);
@@ -87,6 +88,10 @@ public class SkillSelect : MonoBehaviour
 
     public void OnClick(int index)
     {
+        if (_selectTable[index].Type == SelectType.Skill || _selectTable[index].Type == SelectType.Passive)
+        {
+            _selectTable[index].Level++;
+        }
         GameManager.Instance.LevelUpSelect(_selectTable[index]);
         _isSelect = false;
         GameManager.Instance.IsPause();
