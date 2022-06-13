@@ -33,12 +33,17 @@ public class Bomber : Skillbase, ISkill
         switch (_skillLevel)
         {
             case 2:
+                _ballnum++;
                 break;
             case 3:
+                _Bomb._maxdamage = _maxdamage + (50 / 100) * _maxdamage;
+                _Bomb._mindamage = _mindamage + 1;
                 break;
             case 4:
+                _Bomb._def++;
                 break;
             case 5:
+                _ballnum++;
                 break;
             default:
                 break;

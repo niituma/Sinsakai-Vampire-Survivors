@@ -12,8 +12,6 @@ public class Spawner : MonoBehaviour
     float _countTimer = 0.0f;
     [SerializeField] float _fadeTiming = 0.0f;
     [SerializeField] float _changeEnemyTiming = 5.0f;
-    float _cRad = 0.0f;
-    [SerializeField] bool _isCircleSpawn = false;
 
     bool _isFade = false;
     GameObject _player;
@@ -51,14 +49,6 @@ public class Spawner : MonoBehaviour
     {
         _countTimer += Time.deltaTime;
 
-
-        if (_fadeTiming == _gameTimer._minute)
-        {
-            _fadeTiming += _fadeTiming;
-            _isFade = true;
-            StartCoroutine(Method.DelayMethod(10f, () => _isFade = false));
-        }
-
         if (_bossSpawnTime == _gameTimer._minute)
         {
             var boss = Instantiate(_boss, SpawnRandomPos() + _player.transform.position, Quaternion.identity);
@@ -67,16 +57,15 @@ public class Spawner : MonoBehaviour
             _bossSpawnTime += 1;
         }
 
+        if (_fadeTiming == _gameTimer._minute)
+        {
+            FadeSpawn();
+            _fadeTiming += _fadeTiming;
+        }
+
         if (_countTimer > _time)
         {
-            if (_isFade)
-            {
-                FadeSpawn();
-            }
-            else
-            {
-                Spawn();
-            }
+            Spawn();
             _countTimer -= _time;
         }
     }
@@ -104,21 +93,18 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        var SpawnPos = _isCircleSpawn ? CirclePos() : SpawnRandomPos() + _player.transform.position;
+        var SpawnPos = SpawnRandomPos() + _player.transform.position;
 
         script.transform.position = SpawnPos;
     }
 
     void FadeSpawn()
     {
-        for (int i = 0; i < 15; ++i)
+        for (int i = 0; i < 10; ++i)
         {
             Spawn();
         }
-        if (_isCircleSpawn)
-        {
-            _isCircleSpawn = false;
-        }
+
         return;
     }
 
@@ -140,20 +126,6 @@ public class Spawner : MonoBehaviour
         }
 
         pos.z = 0;
-
-        return pos;
-    }
-
-    Vector3 CirclePos()
-    {
-        Vector3 pos = new Vector3();
-
-        pos.x = _player.transform.position.x + 13 * Mathf.Cos(_cRad);
-        pos.y = _player.transform.position.y + 13 * Mathf.Sin(_cRad);
-
-        pos.z = 0;
-
-        _cRad += 1f;
 
         return pos;
     }

@@ -108,13 +108,13 @@ public class GameManager
         _expSlider.value += addexp;
 
         //レベルアップ
-        if (_expSlider.value == _expValue)
+        if (_expSlider.value == _expSlider.maxValue)
         {
             ++_level;
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expSlider.maxValue += _expValue;
+            _expSlider.maxValue += 3;
 
             _isPause = true;
         }

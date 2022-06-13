@@ -6,10 +6,12 @@ using System.Linq;
 public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] List<GameObject> _skills = new List<GameObject>();
+    [SerializeField] GameObject _skillList = null;
+    [SerializeField] GameObject _skillListIcon = null;
 
     private void Awake()
     {
-        AddSkill(4);
+        AddSkill(1);
     }
     // Update is called once per frame
     void Update()
@@ -47,6 +49,9 @@ public class PlayerAttackController : MonoBehaviour
                     newskill = Instantiate(Resources.Load<GameObject>("Skills/Bomber"), transform.position, Quaternion.identity);
                     break;
             }
+
+            newskill.transform.parent = _skillList.transform;
+            _skillListIcon.transform.GetChild(_skills.Count).transform.GetChild(skillId - 1).gameObject.SetActive(true);
 
             if (newskill != null)
             {

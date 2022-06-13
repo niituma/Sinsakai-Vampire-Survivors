@@ -8,11 +8,12 @@ public class ShotMagic : Skillbase, ISkill
     public SkillDef SkillId => SkillDef.ShotMagic;
     GameObject _player = null;
     [SerializeField] Bullet _bullet = null;
+    int __bulletnum = 1;
     int _prefabCapacity = 30;
     ObjectPool<Bullet> _bulletPool = new ObjectPool<Bullet>();
     public void Setup()
     {
-        _cooldown = 0.5f;
+        _cooldown = 0.8f;
         _player = GameObject.FindGameObjectWithTag("Player");
         _bulletPool.SetBaseObj(_bullet, gameObject.transform);
         _bulletPool.SetCapacity(_prefabCapacity);
@@ -22,7 +23,8 @@ public class ShotMagic : Skillbase, ISkill
         _timer += Time.deltaTime;
         if (_timer >= _cooldown)
         {
-            ActiveSkill();
+            StartCoroutine(DelayCoroutine());
+
             _timer -= _cooldown;
         }
     }
@@ -32,17 +34,18 @@ public class ShotMagic : Skillbase, ISkill
         switch (_skillLevel)
         {
             case 2:
-                _cooldown = 1f;
+                __bulletnum++;
                 break;
             case 3:
-                _bullet.GetComponent<Bullet>()._maxdamage = _maxdamage *= 2;
-                _bullet.GetComponent<Bullet>()._mindamage = _mindamage *= 2;
+                _bullet._maxdamage += _maxdamage + (50 / 100) * _maxdamage;
+                _bullet._mindamage = _mindamage + 1;
                 break;
             case 4:
-                _cooldown = 0.5f;
+                _cooldown -= 0.1f;
                 break;
             case 5:
-
+                _bullet._maxdamage = _maxdamage + (50 / 100) * _maxdamage;
+                _bullet._mindamage = _mindamage + 1;
                 break;
             default:
                 break;
@@ -66,5 +69,13 @@ public class ShotMagic : Skillbase, ISkill
 
         script.transform.position = _player.transform.position;
         script.Shoot(target);
+    }
+    private IEnumerator DelayCoroutine()
+    {
+        for (int i = 0; i < __bulletnum; i++)
+        {
+            ActiveSkill();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

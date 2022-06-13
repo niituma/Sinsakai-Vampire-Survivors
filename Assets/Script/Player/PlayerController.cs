@@ -8,10 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField, Tooltip("Playerの移動スピード")] float _speed = 7f;
     [SerializeField, Tooltip("Playerのステップ移動のスピード")] float _stepSpeed = 10f;
-    [SerializeField, Tooltip("Playerの移動制限する")] float _moveCooltime = 0.3f;
-    [SerializeField] float _stepMoveCooltime = 2f;
-    bool _isMoving = true;
-    bool _isStepMoving = false;
     float _h, _v;
     Vector2 _dir;
     Vector2 _lastdir = new Vector2(0, -1);
@@ -37,58 +33,23 @@ public class PlayerController : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
         _dir = new Vector2(_h, _v);
-
-        if (Input.GetButtonDown("Jump") && _isMoving && !_isStepMoving)
-        {
-            var _scale = transform.localScale;
-
-            _isStepMoving = true;
-            _isMoving = false;
-            _rb.velocity = _dir == Vector2.zero ? new Vector2(_stepSpeed * _lastdir.x, _stepSpeed * _lastdir.y) :
-                _rb.velocity = new Vector2(_stepSpeed * _h, _stepSpeed * _v);
-            StartCoroutine(Method.DelayMethod(_stepMoveCooltime, () => _isStepMoving = false));
-            StartCoroutine(Method.DelayMethod(_moveCooltime, () => _isMoving = true));
-        }
     }
     private void FixedUpdate()
     {
-        if (_isMoving)
-        {
-            float speed = _dir == Vector2.zero ? 0 : _speed;
-            _rb.velocity = _dir.normalized * speed;
-        }
+        float speed = _dir == Vector2.zero ? 0 : _speed;
+        _rb.velocity = _dir.normalized * speed;
+
     }
     private void LateUpdate()
     {
         AnimateDir();
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        if (_isMoving)
-    //        {
-    //            _hp.Damege();
-    //        }
-    //        else
-    //        {
-    //            collision.gameObject.GetComponent<EnemyHPController>().Damege(1);
-    //        }
-    //    }
-    //}
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            if (_isMoving)
-            {
-                _hp.Damege();
-            }
-            else
-            {
-                collision.gameObject.GetComponent<EnemyHPController>().Damege(1);
-            }
+            _hp.Damege();
         }
 
     }

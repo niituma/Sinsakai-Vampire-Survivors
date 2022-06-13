@@ -11,8 +11,8 @@ public class Barrier : Skillbase, ISkill
     GameObject _player = null;
     public void Setup()
     {
-        _maxdamage = 3;
-        _cooldown = 0.1f;
+        _maxdamage = 2;
+        _cooldown = 0.5f;
         _player = GameObject.FindGameObjectWithTag("Player");
     }
     public void SkillUpdate()
@@ -28,17 +28,30 @@ public class Barrier : Skillbase, ISkill
     public void Levelup()
     {
         _skillLevel++;
+        var scale = transform.localScale;
         switch (_skillLevel)
         {
             case 2:
-                _maxdamage = _maxdamage *= 2;
-                _mindamage = _mindamage *= 2;
+                _maxdamage += (50 / 100) * _maxdamage;
+                _mindamage += 1;
                 break;
             case 3:
+                scale.x *= 2;
+                scale.y *= 2;
+                transform.localScale = scale;
+                _sizeRadius *= 2;
+                _cooldown -= 0.1f;
                 break;
             case 4:
+                _maxdamage += (50 / 100) * _maxdamage;
+                _mindamage += 1;
                 break;
             case 5:
+                scale.x *= 1.1f;
+                scale.y *= 1.1f;
+                transform.localScale = scale;
+                _sizeRadius *= 1.1f;
+                _cooldown -= 0.2f;
                 break;
             default:
                 break;

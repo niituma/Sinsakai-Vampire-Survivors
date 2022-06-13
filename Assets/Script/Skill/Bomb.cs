@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour, IObjectPool
     public int _mindamage { get; set; } = 3;
     public int _maxdamage { get; set; } = 5;
     float _movePower = 10f;
-    int _def = 2;
+    public int _def { get; set; } = 2;
     int _damageCount = 0;
     GameObject _player;
     Rigidbody2D _rb;
