@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7963c7549d768d489e370f699027f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _godMode: 0
+  _godMode: 1
   _maxhp: 200
   _notdamageTime: 0.3
   _slider: {fileID: 1494947360}
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131552339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19425507be767724f94a896d0cf49256, type: 3}
   m_Name: 
