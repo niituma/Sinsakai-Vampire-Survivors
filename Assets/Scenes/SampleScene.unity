@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnArea: {x: 11, y: 6}
-  _time: 1
+  _time: 0
   _prefab: {fileID: -2620388822643326051, guid: 8bfbfa1d211a05b489c6b03c52d9ac3f, type: 3}
   _root: {fileID: 191008770}
   _prefabCapacity: 1000
@@ -2509,7 +2509,7 @@ MonoBehaviour:
   _fadeTiming: 1
   _changeEnemyTiming: 2
   _boss: {fileID: 809402456235726491, guid: 6195e115f02fe4e4b9fa7f7b400e0a27, type: 3}
-  _bossSpawnTime: 0
+  _bossSpawnTime: 5
   _bossHP: 1000
 --- !u!114 &889064703
 MonoBehaviour:
@@ -5810,7 +5810,7 @@ MonoBehaviour:
   _skills: []
   _skillList: {fileID: 1765053481}
   _skillListIcon: {fileID: 1029218070}
-  _skillid: 1
+  _skillid: 3
 --- !u!114 &2123202035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5823,8 +5823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b26ac80f6e6cdf489b20f6a5a8be9dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _stepSpeed: 18.5
+  _speed: 3
 --- !u!50 &2123202036
 Rigidbody2D:
   serializedVersion: 4

@@ -6,7 +6,6 @@ using System.Linq;
 public class ShotMagic : Skillbase, ISkill
 {
     public SkillDef SkillId => SkillDef.ShotMagic;
-    GameObject _player = null;
     [SerializeField] Bullet _bullet = null;
     int __bulletnum = 1;
     int _prefabCapacity = 30;
@@ -14,7 +13,6 @@ public class ShotMagic : Skillbase, ISkill
     public void Setup()
     {
         _cooldown = 0.8f;
-        _player = GameManager.Instance._player.gameObject;
         _bulletPool.SetBaseObj(_bullet, gameObject.transform);
         _bulletPool.SetCapacity(_prefabCapacity);
     }
@@ -53,7 +51,7 @@ public class ShotMagic : Skillbase, ISkill
     }
     public override void ActiveSkill()
     {
-        if (!_player)
+        if (!GameManager.Instance._player.gameObject)
         {
             return;
         }
@@ -65,9 +63,9 @@ public class ShotMagic : Skillbase, ISkill
         }
         var list = GameManager.Instance._enemies;
         Enemybase target = list.Where(e => e.gameObject.activeSelf)
-            .OrderBy(e => Vector3.Distance(e.transform.position, _player.transform.position)).FirstOrDefault();
+            .OrderBy(e => Vector3.Distance(e.transform.position, GameManager.Instance._player.gameObject.transform.position)).FirstOrDefault();
 
-        script.transform.position = _player.transform.position;
+        script.transform.position = GameManager.Instance._player.gameObject.transform.position;
         script.Shoot(target);
     }
     private IEnumerator DelayCoroutine()

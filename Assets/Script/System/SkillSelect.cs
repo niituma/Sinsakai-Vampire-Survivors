@@ -62,7 +62,6 @@ public class SkillSelect : MonoBehaviour
         var list = GameData.SkillSelectTable.Where(s => _maxLevel != s.Level);
 
         int totalProb = list.Sum(s => s.Probability);
-        int rand = Random.Range(0, totalProb);
 
         for (int i = 0; i < _selectList.Count; ++i)
         {
@@ -70,7 +69,8 @@ public class SkillSelect : MonoBehaviour
             _selectTable[i] = null;
             _selectText[i].text = "";
         }
-
+        var count = 0;
+        int rand = Random.Range(0, totalProb);
         for (int i = 0; i < _selectList.Count; ++i)
         {
             foreach (var s in list)
@@ -80,9 +80,11 @@ public class SkillSelect : MonoBehaviour
                     _selectTable[i] = s;
                     _selectText[i].text = s.Name;
                     list = list.Where(ls => !(ls.Type == s.Type && ls.TargetId == s.TargetId));
+                    count++;
                     break;
                 }
                 rand -= s.Probability;
+
             }
 
             if (_selectTable[i] == null)

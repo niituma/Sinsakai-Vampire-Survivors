@@ -8,16 +8,14 @@ public class Barrier : Skillbase, ISkill
     public SkillDef SkillId => SkillDef.Barrier;
     [SerializeField] float _sizeRadius = 3f;
     Vector3 _center;
-    GameObject _player = null;
     public void Setup()
     {
         _maxdamage = 2;
         _cooldown = 0.5f;
-        _player = GameManager.Instance._player.gameObject;
     }
     public void SkillUpdate()
     {
-        transform.position = _player.transform.position;
+        transform.position = GameManager.Instance._player.gameObject.transform.position;
         _timer += Time.deltaTime;
         if (_timer >= _cooldown)
         {

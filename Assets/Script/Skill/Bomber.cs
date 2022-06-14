@@ -6,7 +6,6 @@ using System.Linq;
 public class Bomber : Skillbase, ISkill
 {
     public SkillDef SkillId => SkillDef.Bomber;
-    GameObject _player = null;
     [SerializeField] Bomb _Bomb = null;
     int _ballnum = 3;
     int _prefabCapacity = 30;
@@ -14,7 +13,6 @@ public class Bomber : Skillbase, ISkill
     public void Setup()
     {
         _cooldown = 5f;
-        _player = GameManager.Instance._player.gameObject;
         _BombPool.SetBaseObj(_Bomb, gameObject.transform);
         _BombPool.SetCapacity(_prefabCapacity);
     }
@@ -51,7 +49,7 @@ public class Bomber : Skillbase, ISkill
     }
     public override void ActiveSkill()
     {
-        if (!_player)
+        if (!GameManager.Instance._player.gameObject)
         {
             return;
         }
@@ -62,7 +60,7 @@ public class Bomber : Skillbase, ISkill
             {
                 break;
             }
-            script.transform.position = _player.transform.position;
+            script.transform.position = GameManager.Instance._player.gameObject.transform.position;
         }
 
 

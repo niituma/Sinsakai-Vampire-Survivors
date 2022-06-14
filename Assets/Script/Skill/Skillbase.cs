@@ -36,7 +36,7 @@ public enum SkillDef
 public enum PassiveDef
 {
     Invalid = 0,
-    HPUp = 1,
+    MaxHPUp = 1,
     SpeedUp = 2,
     ExpUp = 3,
 }

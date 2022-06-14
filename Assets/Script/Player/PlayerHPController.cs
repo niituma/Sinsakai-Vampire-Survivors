@@ -7,7 +7,7 @@ using DG.Tweening;
 public class PlayerHPController : MonoBehaviour
 {
     [SerializeField, Tooltip("無敵モード")] bool _godMode;
-    [SerializeField, Tooltip("最大HP")] float _maxhp = 200f;
+    [SerializeField, Tooltip("最大HP")] float _maxhp  = 200;
     float _currenthp = 0f;
     float _damage = 5f;
     [SerializeField, Tooltip("ダメージを受けたら一定時間無敵にする時間")] float _notdamageTime = 0.1f;
@@ -15,6 +15,8 @@ public class PlayerHPController : MonoBehaviour
     AddOrignalMethod Method = new AddOrignalMethod();
 
     [SerializeField] Slider _slider;
+
+    public float Maxhp { get => _maxhp; set => _maxhp = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -54,5 +56,11 @@ public class PlayerHPController : MonoBehaviour
         var heel = value;
         _currenthp = Mathf.Min(_currenthp + heel, _maxhp);
         _slider.value = _currenthp / _maxhp;
+    }
+
+    public void MaxHPUp(float addhp)
+    {
+        _maxhp += addhp;
+        _slider.value = _currenthp / (int)_maxhp;
     }
 }

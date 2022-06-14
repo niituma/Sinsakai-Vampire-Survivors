@@ -14,7 +14,11 @@ public class Bullet : MonoBehaviour, IObjectPool
     public void Shoot(Enemybase target)
     {
         _target = target;
-        if (_target == null) return;
+        if (_target == null)
+        {
+            _shootVec = new(0, 1, 0);
+            return;
+        }
 
         _shootVec = _target.transform.position - GameManager.Instance._player.transform.position;
         _shootVec.Normalize();

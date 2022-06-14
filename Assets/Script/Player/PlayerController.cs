@@ -7,7 +7,8 @@ using System.Linq;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField, Tooltip("Playerの移動スピード")] float _speed = 7f;
-    [SerializeField, Tooltip("Playerのステップ移動のスピード")] float _stepSpeed = 10f;
+    public float Speed { get => _speed;  set => _speed = value; }
+    public float _addSpeed { get; set; } = 0;
     float _h, _v;
     Vector2 _dir;
     Vector2 _lastdir = new Vector2(0, -1);
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        float speed = _dir == Vector2.zero ? 0 : _speed;
+        float speed = _dir == Vector2.zero ? 0 : _speed + _addSpeed;
         _rb.velocity = _dir.normalized * speed;
 
     }

@@ -15,7 +15,9 @@ public class GameManager
 
     int _stackLevelup = 0;
     int _level = 0;
-    int _expValue = 1;
+    int _expMaxValue = 1;
+    float _expValue = 1;
+    float _passiveUpValue = 0;
     public Slider _expSlider { get; set; }
     public TextMeshProUGUI _levelText { get; set; }
     public GameObject _finishPanel { get; set; }
@@ -35,7 +37,7 @@ public class GameManager
         _enemies = GameObject.FindObjectsOfType<Enemybase>(true).ToList();
         _playerAttack = _player.GetComponent<PlayerAttackController>();
         _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
-        _expSlider.maxValue = _expValue;
+        _expSlider.maxValue = _expMaxValue;
         _isPause = false;
     }
 
@@ -83,7 +85,7 @@ public class GameManager
                 break;
 
             case SelectType.Execute:
-                
+                _player.GetComponent<PlayerHPController>().Heel(30);
                 break;
         }
 
@@ -101,14 +103,16 @@ public class GameManager
     {
         switch ((PassiveDef)PassiveId)
         {
-            case PassiveDef.HPUp:
-
+            case PassiveDef.MaxHPUp:
+                var UpHP = (10f / 100f) * _player.gameObject.GetComponent<PlayerHPController>().Maxhp;
+                _player.GetComponent<PlayerHPController>().MaxHPUp(UpHP);
                 break;
             case PassiveDef.SpeedUp:
-
+                var speed = _player.gameObject.GetComponent<PlayerController>().Speed;
+                _player.gameObject.GetComponent<PlayerController>().Speed += (20f / 100f) * speed;
                 break;
             case PassiveDef.ExpUp:
-
+                _passiveUpValue ++;
                 break;
             default:
                 break;
@@ -117,9 +121,9 @@ public class GameManager
     /// <summary>
     /// 経験値取得
     /// </summary>
-    public void AddExp(int addexp)
+    public void AddExp()
     {
-        _expSlider.value += addexp;
+        _expSlider.value += _expValue + _passiveUpValue;
 
         //レベルアップ
         if (_expSlider.value == _expSlider.maxValue)
@@ -128,7 +132,7 @@ public class GameManager
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expSlider.maxValue += 5;
+            _expSlider.maxValue += 0;
 
             _isPause = true;
         }
