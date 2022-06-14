@@ -17,8 +17,11 @@ public class PlayerController : MonoBehaviour
     Animator _anim;
 
     public Vector2 Lastdir { get => _lastdir; set => _lastdir = value; }
-    AddOrignalMethod Method = new AddOrignalMethod();
 
+    private void Awake()
+    {
+        GameManager.Instance.SetPlayer(this);
+    }
     // Start is called before the first frame update
     void Start()
     {

@@ -8,10 +8,11 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] List<GameObject> _skills = new List<GameObject>();
     [SerializeField] GameObject _skillList = null;
     [SerializeField] GameObject _skillListIcon = null;
+    [SerializeField] int _skillid = 0;
 
     private void Awake()
     {
-        AddSkill(1);
+        AddSkill(_skillid);
     }
     // Update is called once per frame
     void Update()

@@ -13,7 +13,7 @@ public class Barrier : Skillbase, ISkill
     {
         _maxdamage = 2;
         _cooldown = 0.5f;
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameManager.Instance._player.gameObject;
     }
     public void SkillUpdate()
     {

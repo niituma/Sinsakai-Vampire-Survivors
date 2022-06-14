@@ -11,8 +11,6 @@ public class GameManager
     static public GameManager Instance => _instance;
     private GameManager() { }
     static public int Level => _instance._level;
-
-    List<int> _passive = new List<int>();
     public List<Enemybase> _enemies { get; private set; } = new List<Enemybase>();
 
     int _stackLevelup = 0;
@@ -26,7 +24,8 @@ public class GameManager
     public int _result_timeminute { get; set; }
     public int _result_timesecond { get; set; }
 
-    public GameObject _player { get; private set; } = null;
+    public PlayerController _player { get; private set; } = null;
+    public void SetPlayer(PlayerController p) { _player = p; }
     PlayerAttackController _playerAttack = null;
     SkillSelect _sklSelect = null;
 
@@ -34,7 +33,6 @@ public class GameManager
     public void Setup()
     {
         _enemies = GameObject.FindObjectsOfType<Enemybase>(true).ToList();
-        _player = GameObject.FindGameObjectWithTag("Player");
         _playerAttack = _player.GetComponent<PlayerAttackController>();
         _sklSelect = GameObject.FindObjectOfType<SkillSelect>();
         _expSlider.maxValue = _expValue;
@@ -81,11 +79,11 @@ public class GameManager
                 break;
 
             case SelectType.Passive:
-                _passive.Add(table.TargetId);
+                AddPassive(table.TargetId);
                 break;
 
             case SelectType.Execute:
-                //TODO:
+                
                 break;
         }
 
@@ -99,7 +97,23 @@ public class GameManager
             Time.timeScale = 1;
         }
     }
+    void AddPassive(int PassiveId)
+    {
+        switch ((PassiveDef)PassiveId)
+        {
+            case PassiveDef.HPUp:
 
+                break;
+            case PassiveDef.SpeedUp:
+
+                break;
+            case PassiveDef.ExpUp:
+
+                break;
+            default:
+                break;
+        }
+    }
     /// <summary>
     /// ŒoŒ±’lŽæ“¾
     /// </summary>
@@ -114,7 +128,7 @@ public class GameManager
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expSlider.maxValue += 1;
+            _expSlider.maxValue += 5;
 
             _isPause = true;
         }

@@ -15,7 +15,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
         _HP = GetComponent<EnemyHPController>();
         _itemSpawner = FindObjectOfType<ItemSpawner>();
         _rb = GetComponent<Rigidbody2D>();
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameManager.Instance._player.gameObject;
     }
 
     // Update is called once per frame

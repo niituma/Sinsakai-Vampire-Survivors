@@ -574,6 +574,37 @@ MonoBehaviour:
   _ignoreGameObjects:
   - {fileID: 1139524136}
   - {fileID: 880944694}
+--- !u!1 &223099603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223099604}
+  m_Layer: 0
+  m_Name: HitEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223099604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223099603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7067649, y: 0.5167585, z: 0.11222355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &264478691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,6 +2450,7 @@ GameObject:
   - component: {fileID: 889064700}
   - component: {fileID: 889064702}
   - component: {fileID: 889064701}
+  - component: {fileID: 889064703}
   m_Layer: 0
   m_Name: SpawnerManager
   m_TagString: Untagged
@@ -2468,17 +2500,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aeb7aecb30c6374f84b1831f368a230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnArea: {x: 13, y: 8}
-  _time: 0.5
+  _spawnArea: {x: 11, y: 6}
+  _time: 1
   _prefab: {fileID: -2620388822643326051, guid: 8bfbfa1d211a05b489c6b03c52d9ac3f, type: 3}
   _root: {fileID: 191008770}
   _prefabCapacity: 1000
   _startInstantiateRatio: 1
   _fadeTiming: 1
-  _changeEnemyTiming: 3
+  _changeEnemyTiming: 2
   _boss: {fileID: 809402456235726491, guid: 6195e115f02fe4e4b9fa7f7b400e0a27, type: 3}
-  _bossSpawnTime: 5
-  _bossHP: 100
+  _bossSpawnTime: 0
+  _bossHP: 1000
+--- !u!114 &889064703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889064699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d5e53cdc6414f4799097547e0272b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3641505023694262876, guid: b7578c4ffb32d8048bba35668eeb16f9, type: 3}
+  _root: {fileID: 223099604}
+  _prefabCapacity: 30
 --- !u!1 &937256732
 GameObject:
   m_ObjectHideFlags: 0
@@ -5763,6 +5810,7 @@ MonoBehaviour:
   _skills: []
   _skillList: {fileID: 1765053481}
   _skillListIcon: {fileID: 1029218070}
+  _skillid: 1
 --- !u!114 &2123202035
 MonoBehaviour:
   m_ObjectHideFlags: 0

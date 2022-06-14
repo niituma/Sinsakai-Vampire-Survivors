@@ -40,13 +40,19 @@ public class PlayerHPController : MonoBehaviour
             var damage = _damage;
             _currenthp = _currenthp - damage;
             _slider.value = _currenthp / _maxhp;
-            StartCoroutine(Method.DelayMethod(_notdamageTime, () => _isdamaging = false)) ;
+            GetComponent<SpriteRenderer>().color = Color.red;
+            StartCoroutine(Method.DelayMethod(_notdamageTime, () =>
+            {
+                _isdamaging = false;
+                GetComponent<SpriteRenderer>().color = Color.white;
+            }
+            ));
         }
     }
     public void Heel(float value)
     {
         var heel = value;
-        _currenthp = Mathf.Min(_currenthp + heel,_maxhp);
+        _currenthp = Mathf.Min(_currenthp + heel, _maxhp);
         _slider.value = _currenthp / _maxhp;
     }
 }

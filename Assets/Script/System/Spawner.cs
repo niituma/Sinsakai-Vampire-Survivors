@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -9,16 +11,15 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("最大スポーン数")] int _prefabCapacity = 30;
     [SerializeField, Tooltip("最初に一気にスポーンする割合"), Range(0, 100)] int _startInstantiateRatio = 10;
 
-    float _countTimer = 0.0f;
+    float _spawnTime = 0.0f;
     [SerializeField] float _fadeTiming = 0.0f;
     [SerializeField] float _changeEnemyTiming = 5.0f;
 
-    bool _isFade = false;
     GameObject _player;
     Timer _gameTimer;
     ObjectPool<Enemybase> _enemyPool = new ObjectPool<Enemybase>();
     public EnemyDate _date { get; private set; }
-    AddOrignalMethod Method = new AddOrignalMethod();
+    float StartPrefab = 0f;
 
     [Header("Bossスポーンの設定")]
     [SerializeField] GameObject _boss;
@@ -40,33 +41,32 @@ public class Spawner : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_prefabCapacity);
-        var StartPrefab = _prefabCapacity * ((float)_startInstantiateRatio / 100f);
-
-        for (int i = 0; i < StartPrefab; ++i) Spawn();
+        StartPrefab = _prefabCapacity * ((float)_startInstantiateRatio / 100f);
     }
 
     private void Update()
     {
-        _countTimer += Time.deltaTime;
+        _spawnTime += Time.deltaTime;
 
         if (_bossSpawnTime == _gameTimer._minute)
         {
             var boss = Instantiate(_boss, SpawnRandomPos() + _player.transform.position, Quaternion.identity);
             boss.transform.SetParent(_root);
             boss.GetComponent<EnemyHPController>()._currenthp = _bossHP;
+            GameManager.Instance._enemies.Add(boss.GetComponent<Enemybase>());
             _bossSpawnTime += 1;
         }
 
         if (_fadeTiming == _gameTimer._minute)
         {
-            FadeSpawn();
+            StartCoroutine(FadeSpawn());
             _fadeTiming += _fadeTiming;
         }
 
-        if (_countTimer > _time)
+        if (_spawnTime > _time)
         {
             Spawn();
-            _countTimer -= _time;
+            _spawnTime -= _time;
         }
     }
 
@@ -98,14 +98,18 @@ public class Spawner : MonoBehaviour
         script.transform.position = SpawnPos;
     }
 
-    void FadeSpawn()
+    private IEnumerator FadeSpawn()
     {
-        for (int i = 0; i < 10; ++i)
+        for (int c = 0; c < 3; ++c)
         {
-            Spawn();
-        }
 
-        return;
+            for (int i = 0; i < StartPrefab; ++i)
+            {
+                Spawn();
+            }
+
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     Vector3 SpawnRandomPos()

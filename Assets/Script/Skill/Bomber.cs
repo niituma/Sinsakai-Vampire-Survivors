@@ -14,7 +14,7 @@ public class Bomber : Skillbase, ISkill
     public void Setup()
     {
         _cooldown = 5f;
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameManager.Instance._player.gameObject;
         _BombPool.SetBaseObj(_Bomb, gameObject.transform);
         _BombPool.SetCapacity(_prefabCapacity);
     }

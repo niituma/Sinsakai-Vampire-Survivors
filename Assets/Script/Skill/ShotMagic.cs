@@ -14,7 +14,7 @@ public class ShotMagic : Skillbase, ISkill
     public void Setup()
     {
         _cooldown = 0.8f;
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameManager.Instance._player.gameObject;
         _bulletPool.SetBaseObj(_bullet, gameObject.transform);
         _bulletPool.SetCapacity(_prefabCapacity);
     }

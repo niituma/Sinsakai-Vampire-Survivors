@@ -26,9 +26,9 @@ public class GameData
         new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 2, Name = "魔法の杖", Level = 1, Probability = 5 },
         new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 3, Name = "結界", Level = 1, Probability = 5 },
         new SkillSelectTable(){ Type = SelectType.Skill, TargetId = 4, Name = "スパイク", Level = 1, Probability = 10 },
-        new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 1, Name = "攻撃UP", Level = 1, Probability = 40 },
+        new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 1, Name = "最大体力UP", Level = 1, Probability = 40 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 2, Name = "速度UP", Level = 1, Probability = 50 },
-        new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 3, Name = "攻撃速度UP", Level = 1, Probability = 50 },
+        new SkillSelectTable(){ Type = SelectType.Passive, TargetId = 3, Name = "経験値UP", Level = 1, Probability = 50 },
         new SkillSelectTable(){ Type = SelectType.Execute, TargetId = 1, Name = "回復", Level = 0, Probability = 90 }
     };
 

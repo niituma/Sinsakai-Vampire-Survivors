@@ -33,3 +33,10 @@ public enum SkillDef
     Barrier = 3,
     Bomber = 4,
 }
+public enum PassiveDef
+{
+    Invalid = 0,
+    HPUp = 1,
+    SpeedUp = 2,
+    ExpUp = 3,
+}
