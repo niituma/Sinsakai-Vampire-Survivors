@@ -66,6 +66,7 @@ public class SkillSelect : MonoBehaviour
 
         for (int i = 0; i < _selectList.Count; ++i)
         {
+            _selectList[i].SetActive(true);
             _selectTable[i] = null;
             _selectText[i].text = "";
         }
@@ -83,11 +84,20 @@ public class SkillSelect : MonoBehaviour
                 }
                 rand -= s.Probability;
             }
+
+            if (_selectTable[i] == null)
+            {
+                _selectList[i].SetActive(false);
+            }
         }
     }
 
     public void OnClick(int index)
     {
+        if (_selectTable[index] == null)
+        {
+            return;
+        }
         if (_selectTable[index].Type == SelectType.Skill || _selectTable[index].Type == SelectType.Passive)
         {
             _selectTable[index].Level++;

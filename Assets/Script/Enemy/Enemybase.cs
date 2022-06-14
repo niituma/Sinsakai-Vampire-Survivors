@@ -21,7 +21,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
     // Update is called once per frame
     void Update()
     {
-        if (_HP._currenthp <= 0)
+        if (_HP._currenthp <= 0 && GetComponent<SpriteRenderer>().color == Color.white)
         {
             Destroy();
         }

@@ -114,7 +114,7 @@ public class GameManager
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expSlider.maxValue += 3;
+            _expSlider.maxValue += 1;
 
             _isPause = true;
         }
