@@ -14,7 +14,7 @@ public class GameManager
     public List<Enemybase> _enemies { get; private set; } = new List<Enemybase>();
 
     int _stackLevelup = 0;
-    int _level = 0;
+    int _level = 1;
     int _expMaxValue = 1;
     float _expValue = 1;
     float _passiveUpValue = 0;
@@ -132,7 +132,7 @@ public class GameManager
             _sklSelect.SelectStart();
             _levelText.text = "Lv." + _level.ToString("D2");
             _expSlider.value = 0;
-            _expSlider.maxValue += 0;
+            _expSlider.maxValue += 5;
 
             _isPause = true;
         }

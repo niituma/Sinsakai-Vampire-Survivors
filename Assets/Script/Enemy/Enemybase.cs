@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemybase : MonoBehaviour, IObjectPool
 {
-    [SerializeField] float _speed = 4f;
-    GameObject _player;
-    ItemSpawner _itemSpawner;
-    EnemyHPController _HP;
-    Rigidbody2D _rb;
+    [SerializeField] protected float _speed = 4f;
+    protected GameObject _player;
+    protected ItemSpawner _itemSpawner;
+    protected EnemyHPController _HP;
+    protected Rigidbody2D _rb;
+    bool _isDrop = true;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         _HP = GetComponent<EnemyHPController>();
         _itemSpawner = FindObjectOfType<ItemSpawner>();
@@ -19,7 +20,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (_HP._currenthp <= 0 && GetComponent<SpriteRenderer>().color == Color.white)
         {
@@ -27,20 +28,31 @@ public class Enemybase : MonoBehaviour, IObjectPool
         }
         if (_player)
         {
+            if (Vector2.Distance(transform.position, _player.transform.position) > 15f)
+            {
+                _isDrop = false;
+                Destroy();
+            }
+
             Vector2 Dir = (_player.transform.position - transform.position).normalized;
             _rb.velocity = Dir.normalized * _speed;
 
-            var scale = transform.localScale;
-            if (transform.position.x > _player.transform.position.x && scale.x != -1)
-            {
-                scale.x = -1;
-                transform.localScale = scale;
-            }
-            else if (transform.position.x < _player.transform.position.x && scale.x != 1)
-            {
-                scale.x = 1;
-                transform.localScale = scale;
-            }
+            LeftRightDir();
+        }
+    }
+
+    public void LeftRightDir()
+    {
+        var scale = transform.localScale;
+        if (transform.position.x > _player.transform.position.x && scale.x != -1)
+        {
+            scale.x = -1;
+            transform.localScale = scale;
+        }
+        else if (transform.position.x < _player.transform.position.x && scale.x != 1)
+        {
+            scale.x = 1;
+            transform.localScale = scale;
         }
     }
 
@@ -59,11 +71,19 @@ public class Enemybase : MonoBehaviour, IObjectPool
     }
     public void Destroy()
     {
-        var item = _itemSpawner.Spawn();
-        if (item)
+        if (_isDrop)
         {
-            item.transform.position = transform.position;
+            var item = _itemSpawner.Spawn();
+            if (item)
+            {
+                item.transform.position = transform.position;
+            }
         }
+        else
+        {
+            _isDrop = true;
+        }
+
         gameObject.SetActive(false);
         _isActrive = false;
     }

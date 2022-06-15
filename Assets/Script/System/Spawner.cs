@@ -22,7 +22,14 @@ public class Spawner : MonoBehaviour
     float StartPrefab = 0f;
 
     [Header("BossÉXÉ|Å[ÉìÇÃê›íË")]
-    [SerializeField] GameObject _boss;
+    public ObjectPool<EnemyBigBullet> _bigBulletPool = new ObjectPool<EnemyBigBullet>();
+    public ObjectPool<EnemySmallBullet> _smallBulletPool = new ObjectPool<EnemySmallBullet>();
+    [SerializeField] EnemyBigBullet _bigBullet = null;
+    [SerializeField] EnemySmallBullet _smallBullet = null;
+    [SerializeField] Transform _bBulletroot = null;
+    [SerializeField] Transform _sBulletroot = null;
+    int nulletnum = 10;
+    [SerializeField] GameObject _boss = null;
     [SerializeField] float _bossSpawnTime = 10f;
     [SerializeField] int _bossHP = 100;
     enum Enemy
@@ -41,6 +48,10 @@ public class Spawner : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_prefabCapacity);
+        _bigBulletPool.SetBaseObj(_bigBullet, _bBulletroot);
+        _bigBulletPool.SetCapacity(nulletnum);
+        _smallBulletPool.SetBaseObj(_smallBullet, _sBulletroot);
+        _smallBulletPool.SetCapacity(nulletnum);
         StartPrefab = _prefabCapacity * ((float)_startInstantiateRatio / 100f);
     }
 

@@ -36,7 +36,7 @@ public class Bomb : MonoBehaviour, IObjectPool
     public bool IsActive => _isActrive;
     public void InactiveInstantiate()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameManager.Instance._player.gameObject;
         _rb = GetComponent<Rigidbody2D>();
         gameObject.SetActive(false);
         _isActrive = false;

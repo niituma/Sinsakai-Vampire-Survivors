@@ -68,7 +68,6 @@ public class SkillSelect : MonoBehaviour
             _selectTable[i] = null;
             _selectText[i].text = "";
         }
-        int rand = Random.Range(0, totalProb);
         var selectnum = 0;
         if (list.Count() >= 3)
         {
@@ -86,6 +85,7 @@ public class SkillSelect : MonoBehaviour
         {
             while (_selectTable[i] == null && selectnum > 0)
             {
+                int rand = Random.Range(0, totalProb);
                 foreach (var s in list)
                 {
                     if (rand < s.Probability)
@@ -109,7 +109,6 @@ public class SkillSelect : MonoBehaviour
                 {
                     break;
                 }
-                rand = Random.Range(0, totalProb);
             }
 
             if (_selectTable[i] == null)
