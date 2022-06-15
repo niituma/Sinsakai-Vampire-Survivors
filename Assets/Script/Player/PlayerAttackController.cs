@@ -13,6 +13,7 @@ public class PlayerAttackController : MonoBehaviour
     private void Awake()
     {
         AddSkill(_skillid);
+        GameData.SkillSelectTable[_skillid - 1].Level++;
     }
     // Update is called once per frame
     void Update()

@@ -30,7 +30,7 @@ public class Barrier : Skillbase, ISkill
         switch (_skillLevel)
         {
             case 2:
-                _maxdamage += (50 / 100) * _maxdamage;
+                _maxdamage += (int)((50f / 100f) * _maxdamage);
                 _mindamage += 1;
                 break;
             case 3:
@@ -41,7 +41,7 @@ public class Barrier : Skillbase, ISkill
                 _cooldown -= 0.1f;
                 break;
             case 4:
-                _maxdamage += (50 / 100) * _maxdamage;
+                _maxdamage += (int)((50f / 100f) * _maxdamage);
                 _mindamage += 1;
                 break;
             case 5:

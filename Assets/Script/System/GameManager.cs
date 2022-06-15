@@ -109,7 +109,7 @@ public class GameManager
                 break;
             case PassiveDef.SpeedUp:
                 var speed = _player.gameObject.GetComponent<PlayerController>().Speed;
-                _player.gameObject.GetComponent<PlayerController>().Speed += (20f / 100f) * speed;
+                _player.gameObject.GetComponent<PlayerController>()._addSpeed += (20f / 100f) * speed;
                 break;
             case PassiveDef.ExpUp:
                 _passiveUpValue ++;

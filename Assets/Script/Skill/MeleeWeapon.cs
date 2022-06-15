@@ -32,7 +32,7 @@ public class MeleeWeapon : Skillbase, ISkill
                 _weaps.Add(Instantiate(Resources.Load<GameObject>("Skills/Whip"), transform.position, Quaternion.identity));
                 break;
             case 3:
-                _maxdamage += (50 / 100) * _maxdamage;
+                _maxdamage += (int)(50f / 100f * _maxdamage);
                 _mindamage += 1;
                 foreach (var a in _weaps)
                 {
@@ -44,7 +44,7 @@ public class MeleeWeapon : Skillbase, ISkill
                 _cooldown -= 1;
                 break;
             case 5:
-                _maxdamage += (50 / 100) * _maxdamage;
+                _maxdamage += (int)(50f / 100f * _maxdamage);
                 _mindamage += 1;
                 foreach (var a in _weaps)
                 {

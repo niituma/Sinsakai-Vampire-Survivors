@@ -34,7 +34,7 @@ public class Bomber : Skillbase, ISkill
                 _ballnum++;
                 break;
             case 3:
-                _Bomb._maxdamage = _maxdamage + (50 / 100) * _maxdamage;
+                _Bomb._maxdamage = _maxdamage + (int)((50f / 100f) * _maxdamage);
                 _Bomb._mindamage = _mindamage + 1;
                 break;
             case 4:

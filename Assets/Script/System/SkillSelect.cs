@@ -60,7 +60,6 @@ public class SkillSelect : MonoBehaviour
 
         List<SkillSelectTable> table = new List<SkillSelectTable>();
         var list = GameData.SkillSelectTable.Where(s => _maxLevel != s.Level);
-
         int totalProb = list.Sum(s => s.Probability);
 
         for (int i = 0; i < _selectList.Count; ++i)
@@ -69,22 +68,48 @@ public class SkillSelect : MonoBehaviour
             _selectTable[i] = null;
             _selectText[i].text = "";
         }
-        var count = 0;
         int rand = Random.Range(0, totalProb);
+        var selectnum = 0;
+        if (list.Count() >= 3)
+        {
+            selectnum = 3;
+        }
+        else if (list.Count() == 2)
+        {
+            selectnum = 2;
+        }
+        else
+        {
+            selectnum = 1;
+        }
         for (int i = 0; i < _selectList.Count; ++i)
         {
-            foreach (var s in list)
+            while (_selectTable[i] == null && selectnum > 0)
             {
-                if (rand < s.Probability)
+                foreach (var s in list)
                 {
-                    _selectTable[i] = s;
-                    _selectText[i].text = s.Name;
-                    list = list.Where(ls => !(ls.Type == s.Type && ls.TargetId == s.TargetId));
-                    count++;
+                    if (rand < s.Probability)
+                    {
+                        _selectTable[i] = s;
+                        if (s.Type != SelectType.Execute)
+                        {
+                            _selectText[i].text = $" {s.Name}  Lv.{s.Level + 1}";
+                        }
+                        else
+                        {
+                            _selectText[i].text = s.Name;
+                        }
+                        list = list.Where(ls => !(ls.Type == s.Type && ls.TargetId == s.TargetId));
+                        rand -= s.Probability;
+                        selectnum--;
+                        break;
+                    }
+                }
+                if (_selectTable[i] != null)
+                {
                     break;
                 }
-                rand -= s.Probability;
-
+                rand = Random.Range(0, totalProb);
             }
 
             if (_selectTable[i] == null)

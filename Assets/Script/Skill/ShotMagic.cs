@@ -35,14 +35,14 @@ public class ShotMagic : Skillbase, ISkill
                 __bulletnum++;
                 break;
             case 3:
-                _bullet._maxdamage += _maxdamage + (50 / 100) * _maxdamage;
+                _bullet._maxdamage += _maxdamage + (int)(50f / 100f * _maxdamage);
                 _bullet._mindamage = _mindamage + 1;
                 break;
             case 4:
                 _cooldown -= 0.1f;
                 break;
             case 5:
-                _bullet._maxdamage = _maxdamage + (50 / 100) * _maxdamage;
+                _bullet._maxdamage = _maxdamage + (int)(50f / 100f * _maxdamage);
                 _bullet._mindamage = _mindamage + 1;
                 break;
             default:
