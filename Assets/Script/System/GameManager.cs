@@ -58,7 +58,7 @@ public class GameManager
         _result_timeminute = timer._minute;
         _result_timesecond = (int)timer._second;
         _finishPanel.SetActive(true);
-        if (timer._minute >= 2)
+        if (timer._minute >= 15)
         {
             _finishPanel.transform.GetChild(1).gameObject.SetActive(true);
         }
