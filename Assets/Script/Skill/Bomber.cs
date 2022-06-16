@@ -7,6 +7,7 @@ public class Bomber : Skillbase, ISkill
 {
     public SkillDef SkillId => SkillDef.Bomber;
     [SerializeField] Bomb _Bomb = null;
+    [SerializeField] AudioClip _attackSE = null;
     int _ballnum = 3;
     int _prefabCapacity = 30;
     ObjectPool<Bomb> _BombPool = new ObjectPool<Bomb>();
@@ -55,6 +56,7 @@ public class Bomber : Skillbase, ISkill
         }
         for (int i = 0; i < _ballnum; ++i)
         {
+            GameManager.Instance._playerAttack.Audio.PlayOneShot(_attackSE);
             var script = _BombPool.Instantiate();
             if (!script)
             {

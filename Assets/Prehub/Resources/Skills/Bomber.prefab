@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Bomb: {fileID: 6248646111556691666, guid: 18a860640392fda4491edbc41a229a3c, type: 3}
+  _attackSE: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}

@@ -9,6 +9,9 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] GameObject _skillList = null;
     [SerializeField] GameObject _skillListIcon = null;
     [SerializeField] int _skillid = 0;
+    [SerializeField] AudioSource _audio;
+
+    public AudioSource Audio { get => _audio;}
 
     private void Awake()
     {

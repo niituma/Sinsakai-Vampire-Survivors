@@ -9,6 +9,8 @@ public class SkillSelect : MonoBehaviour
 
     List<SkillSelectTable> _selectTable = new List<SkillSelectTable>();
     List<UnityEngine.UI.Text> _selectText = new List<UnityEngine.UI.Text>();
+    [SerializeField] AudioSource _audio;
+    [SerializeField] AudioClip _levelUpSE;
     int _maxLevel = 5;
     CanvasGroup _canvas;
 
@@ -55,6 +57,8 @@ public class SkillSelect : MonoBehaviour
 
     public void SelectStart()
     {
+        _audio.PlayOneShot(_levelUpSE);
+
         _isSelect = true;
         _canvas.alpha = 1;
 

@@ -28,7 +28,7 @@ public class GameManager
 
     public PlayerController _player { get; private set; } = null;
     public void SetPlayer(PlayerController p) { _player = p; }
-    PlayerAttackController _playerAttack = null;
+    public PlayerAttackController _playerAttack { get; private set; } = null;
     SkillSelect _sklSelect = null;
 
     // Start is called before the first frame update
@@ -50,6 +50,7 @@ public class GameManager
         }
     }
 
+
     public void FinishGame()
     {
         _isPause = true;
@@ -65,8 +66,16 @@ public class GameManager
         {
             _finishPanel.transform.GetChild(2).gameObject.SetActive(true);
         }
+        ResetDate();
     }
 
+    public void ResetDate()
+    {
+        foreach (var date in GameData.SkillSelectTable)
+        {
+            date.Level = 0;
+        }
+    }
     public void IsPause()
     {
         _isPause = !_isPause;
@@ -74,6 +83,8 @@ public class GameManager
     }
     public void LevelUpSelect(SkillSelectTable table)
     {
+
+
         switch (table.Type)
         {
             case SelectType.Skill:
@@ -112,7 +123,7 @@ public class GameManager
                 _player.gameObject.GetComponent<PlayerController>()._addSpeed += (20f / 100f) * speed;
                 break;
             case PassiveDef.ExpUp:
-                _passiveUpValue ++;
+                _passiveUpValue += 0.5f;
                 break;
             default:
                 break;

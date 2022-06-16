@@ -9,7 +9,7 @@ public class Enemybase : MonoBehaviour, IObjectPool
     protected ItemSpawner _itemSpawner;
     protected EnemyHPController _HP;
     protected Rigidbody2D _rb;
-    bool _isDrop = true;
+    protected bool _isDrop = true;
     // Start is called before the first frame update
     public void Start()
     {

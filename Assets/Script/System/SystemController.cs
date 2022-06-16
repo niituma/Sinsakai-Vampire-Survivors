@@ -26,6 +26,11 @@ public class SystemController : MonoBehaviour
         GameManager.Instance.Pause();
     }
 
+    public void ResetLevel()
+    {
+        GameManager.Instance.ResetDate();
+    }
+
     public void IsPause()
     {
         GameManager.Instance.IsPause();

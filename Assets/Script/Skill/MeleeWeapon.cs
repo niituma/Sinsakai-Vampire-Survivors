@@ -6,6 +6,7 @@ public class MeleeWeapon : Skillbase, ISkill
 {
     public SkillDef SkillId => SkillDef.MeleeWeapon;
     List<GameObject> _weaps = new List<GameObject>();
+    [SerializeField] AudioClip _attackSE = null;
     public void Setup()
     {
         var skill = Instantiate(Resources.Load<GameObject>("Skills/Whip"), transform.position, Quaternion.identity);
@@ -60,6 +61,7 @@ public class MeleeWeapon : Skillbase, ISkill
 
     public override void ActiveSkill()
     {
+        GameManager.Instance._playerAttack.Audio.PlayOneShot(_attackSE);
         PlayerController _moveController = FindObjectOfType<PlayerController>();
 
         var rote = transform.rotation;

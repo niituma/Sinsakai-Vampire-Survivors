@@ -28,7 +28,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] EnemySmallBullet _smallBullet = null;
     [SerializeField] Transform _bBulletroot = null;
     [SerializeField] Transform _sBulletroot = null;
-    int nulletnum = 10;
+    [SerializeField] int _bBulletnum = 10;
+    [SerializeField] int _sbulletnum = 10;
     [SerializeField] GameObject _boss = null;
     [SerializeField] float _bossSpawnTime = 10f;
     [SerializeField] int _bossHP = 100;
@@ -49,9 +50,9 @@ public class Spawner : MonoBehaviour
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_prefabCapacity);
         _bigBulletPool.SetBaseObj(_bigBullet, _bBulletroot);
-        _bigBulletPool.SetCapacity(nulletnum);
+        _bigBulletPool.SetCapacity(_bBulletnum);
         _smallBulletPool.SetBaseObj(_smallBullet, _sBulletroot);
-        _smallBulletPool.SetCapacity(nulletnum);
+        _smallBulletPool.SetCapacity(_sbulletnum);
         StartPrefab = _prefabCapacity * ((float)_startInstantiateRatio / 100f);
     }
 
@@ -65,7 +66,7 @@ public class Spawner : MonoBehaviour
             boss.transform.SetParent(_root);
             boss.GetComponent<EnemyHPController>()._currenthp = _bossHP;
             GameManager.Instance._enemies.Add(boss.GetComponent<Enemybase>());
-            _bossSpawnTime += 1;
+            _bossSpawnTime += _bossSpawnTime;
         }
 
         if (_fadeTiming == _gameTimer._minute)
@@ -94,6 +95,7 @@ public class Spawner : MonoBehaviour
             {
                 _enemy++;
                 _changeEnemyTiming += _changeEnemyTiming;
+                _time -= 0.2f;
             }
         }
         _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");

@@ -7,6 +7,7 @@ public class ShotMagic : Skillbase, ISkill
 {
     public SkillDef SkillId => SkillDef.ShotMagic;
     [SerializeField] Bullet _bullet = null;
+    [SerializeField] AudioClip _attackSE = null;
     int __bulletnum = 1;
     int _prefabCapacity = 30;
     ObjectPool<Bullet> _bulletPool = new ObjectPool<Bullet>();
@@ -55,6 +56,7 @@ public class ShotMagic : Skillbase, ISkill
         {
             return;
         }
+        GameManager.Instance._playerAttack.Audio.PlayOneShot(_attackSE);
         var script = _bulletPool.Instantiate();
 
         if (!script)

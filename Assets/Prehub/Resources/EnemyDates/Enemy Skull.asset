@@ -15,4 +15,4 @@ MonoBehaviour:
   _enemyName: Skull
   _model: {fileID: -9010615838638220262, guid: 26f2fab31eacb6948aaee40453cfc60b, type: 3}
   _animator: {fileID: 9100000, guid: a0fda547afbb49544bb6c05bdbc18b71, type: 2}
-  _maxHP: 5
+  _maxHP: 6
