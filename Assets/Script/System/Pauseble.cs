@@ -38,11 +38,9 @@ public class Pauseble : MonoBehaviour
             if (GameManager.Instance._isPause)
             {
                 Pause();
-                Time.timeScale = 0f;
             }
             else if (!GameManager.Instance._isPause)
             {
-                Time.timeScale = 1f;
                 Resume();
             }
             prevPausing = GameManager.Instance._isPause;

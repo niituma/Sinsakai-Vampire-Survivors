@@ -11,7 +11,7 @@ public class BossMove : Enemybase
     [SerializeField] Transform _sMuzzle = null;
     [SerializeField] int _runAwayTime = 3;
     [SerializeField] Vector2 _respawnArea;
-    int _runAwayTimelimit = 0;
+    [SerializeField]int _runAwayTimelimit = 0;
     float _timer = 0;
     Spawner _spawner = null;
     AddOrignalMethod Method = new AddOrignalMethod();
