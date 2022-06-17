@@ -66,7 +66,7 @@ public class Spawner : MonoBehaviour
             boss.transform.SetParent(_root);
             boss.GetComponent<EnemyHPController>()._currenthp = _bossHP;
             GameManager.Instance._enemies.Add(boss.GetComponent<Enemybase>());
-            _bossSpawnTime += _bossSpawnTime;
+            _bossSpawnTime += 1;
         }
 
         if (_fadeTiming == _gameTimer._minute)
