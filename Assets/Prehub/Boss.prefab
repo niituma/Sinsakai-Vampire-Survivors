@@ -232,6 +232,7 @@ MonoBehaviour:
   _sMuzzle: {fileID: 5092463605700940930}
   _runAwayTime: 2
   _respawnArea: {x: 15, y: 13}
+  _runAwayTimelimit: 0
 --- !u!114 &3437107076692969870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 0.01
   m_LinearDrag: 0
   m_AngularDrag: 1
   m_GravityScale: 0

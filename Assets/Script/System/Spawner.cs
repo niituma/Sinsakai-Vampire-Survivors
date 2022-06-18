@@ -32,6 +32,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] int _sbulletnum = 10;
     [SerializeField] GameObject _boss = null;
     [SerializeField] float _bossSpawnTime = 10f;
+    [SerializeField] float _bossSpawnInterval = 5f;
     [SerializeField] int _bossHP = 100;
     enum Enemy
     {
@@ -66,7 +67,7 @@ public class Spawner : MonoBehaviour
             boss.transform.SetParent(_root);
             boss.GetComponent<EnemyHPController>()._currenthp = _bossHP;
             GameManager.Instance._enemies.Add(boss.GetComponent<Enemybase>());
-            _bossSpawnTime += 1;
+            _bossSpawnTime += _bossSpawnInterval;
         }
 
         if (_fadeTiming == _gameTimer._minute)
@@ -101,6 +102,7 @@ public class Spawner : MonoBehaviour
         _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
         _enemyPool.LoadDate(_date);
         var script = _enemyPool.Instantiate();
+        script.GetComponent<Animator>().Play(_date._enemyName);
         if (!script)
         {
             return;

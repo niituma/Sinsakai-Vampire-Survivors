@@ -61,7 +61,6 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
             {
                 (Pool[index] as Enemybase).GetComponent<EnemyHPController>()._currenthp = _date._maxHP;
                 (Pool[index] as Enemybase).GetComponent<SpriteRenderer>().sprite = _date._model;
-                //(Pool[index] as Enemybase).GetComponent<Animator>().runtimeAnimatorController = _date._animator;
             }
             Pool[index].Create();
             ret = Pool[index];

@@ -11,7 +11,7 @@ public class BossMove : Enemybase
     [SerializeField] Transform _sMuzzle = null;
     [SerializeField] int _runAwayTime = 3;
     [SerializeField] Vector2 _respawnArea;
-    [SerializeField]int _runAwayTimelimit = 0;
+    [SerializeField] int _runAwayTimelimit = 0;
     float _timer = 0;
     Spawner _spawner = null;
     AddOrignalMethod Method = new AddOrignalMethod();
@@ -28,8 +28,8 @@ public class BossMove : Enemybase
         if (_gametime == null)
         {
             _gametime = FindObjectOfType<Timer>();
+            _runAwayTimelimit = _gametime._minute + _runAwayTime;
         }
-        _runAwayTimelimit = _gametime._minute + _runAwayTime;
         _timer = 0;
     }
 
@@ -57,7 +57,7 @@ public class BossMove : Enemybase
             }
             else
             {
-              transform.position =  SpawnRandomPos() + GameManager.Instance._player.transform.position;
+                transform.position = SpawnRandomPos() + GameManager.Instance._player.transform.position;
             }
 
         }
