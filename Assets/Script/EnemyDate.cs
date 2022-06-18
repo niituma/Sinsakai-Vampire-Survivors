@@ -8,6 +8,6 @@ public class EnemyDate : ScriptableObject
 {
 	public string _enemyName;
 	public Sprite _model;
-	public AnimatorController _animator;
+	//public AnimatorController _animator;
 	public int _maxHP;
 }
