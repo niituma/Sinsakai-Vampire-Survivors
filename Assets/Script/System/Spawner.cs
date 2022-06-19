@@ -61,6 +61,11 @@ public class Spawner : MonoBehaviour
     {
         _spawnTime += Time.deltaTime;
 
+        if (30 == _gameTimer._minute)
+        {
+            _time = 0f;
+        }
+
         if (_bossSpawnTime == _gameTimer._minute)
         {
             var boss = Instantiate(_boss, SpawnRandomPos() + _player.transform.position, Quaternion.identity);
@@ -102,11 +107,11 @@ public class Spawner : MonoBehaviour
         _date = Resources.Load<EnemyDate>($"EnemyDates/Enemy {_enemy}");
         _enemyPool.LoadDate(_date);
         var script = _enemyPool.Instantiate();
-        script.GetComponent<Animator>().Play(_date._enemyName);
         if (!script)
         {
             return;
         }
+        script.GetComponent<Animator>().Play(_date._enemyName);
 
         var SpawnPos = SpawnRandomPos() + _player.transform.position;
 

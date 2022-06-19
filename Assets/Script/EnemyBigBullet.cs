@@ -10,7 +10,7 @@ public class EnemyBigBullet : MonoBehaviour, IObjectPool
     Rigidbody2D _rb;
     private void Update()
     {
-        if (Vector2.Distance(transform.position, _player.transform.position) > 15f)
+        if (Vector2.Distance(transform.position, _player.transform.position) > 15f || !FindObjectOfType<BossMove>())
         {
             Destroy();
         }

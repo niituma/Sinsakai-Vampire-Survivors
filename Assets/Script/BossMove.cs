@@ -35,6 +35,19 @@ public class BossMove : Enemybase
 
     new void Update()
     {
+        if (_HP._currenthp <= 0)
+        {
+            for (int i = 0; i < 30; ++i)
+            {
+                var item = _itemSpawner.Spawn();
+                if (item)
+                {
+                    item.transform.position = ItemSpawnRandomPos() + transform.position;
+                }
+            }
+            Destroy();
+        }
+
         if (!_runAway && _gametime._minute == _runAwayTimelimit)
         {
             _runAway = true;
@@ -112,6 +125,27 @@ public class BossMove : Enemybase
         {
             pos.x = _respawnArea.x * f;
             pos.y = Random.Range(-_respawnArea.y, _respawnArea.y);
+        }
+
+        pos.z = 0;
+
+        return pos;
+    }
+    Vector3 ItemSpawnRandomPos()
+    {
+        Vector3 pos = new Vector3();
+
+        float f = Random.value > 0.5f ? -1f : 1f;
+
+        if (Random.value > 0.5f)
+        {
+            pos.x = Random.Range(-1f, 1f);
+            pos.y = 1 * f;
+        }
+        else
+        {
+            pos.x = 1 * f;
+            pos.y = Random.Range(-1f, 1f);
         }
 
         pos.z = 0;
